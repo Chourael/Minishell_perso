@@ -1,4 +1,31 @@
 all test (mandatory + bonus)
 https://docs.google.com/spreadsheets/d/1uJHQu0VPsjjBkR4hxOeCMEt3AOM1Hp_SmUzPFhAH-nA/htmlview#gid=0
 
+Fonctionnal minishell projact + a little explenation of the project
+https://github.com/maiadegraaf/minishell
+
+23 page of explenation on how to make a shell
+https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
+
+les cmd shell (utile pour les test)
+https://fr.wikibooks.org/wiki/Programmation_Bash/Notions_essentielles_du_shell_bash
+
+List of ANSI color escape sequences (non obligatoire mais beau)
+https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
+
+une courte explication du projet
+https://m4nnb3ll.medium.com/minishell-building-a-mini-bash-a-42-project-b55a10598218
+
+man de execve, fork et wait
+https://man7.org/linux/man-pages/man2/execve.2.html
+http://manpagesfr.free.fr/man/man2/fork.2.html
+http://manpagesfr.free.fr/man/man2/wait.2.html
+
+man de GNU bash
+https://www.gnu.org/savannah-checkouts/gnu/bash/manual/
+
+tres court explication de shell et explication des fonction
+https://42-cursus.gitbook.io/guide/rank-03/minishell-todo/understand-minishell
+
+pour ne pas voir les leak non generer par notre code
 valgrind --suppressions=readline.supp --track-fds=yes --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
