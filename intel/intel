@@ -29,3 +29,6 @@ https://42-cursus.gitbook.io/guide/rank-03/minishell-todo/understand-minishell
 
 pour ne pas voir les leak non generer par notre code
 valgrind --suppressions=readline.supp --track-fds=yes --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
+
+pour compiler avec readline
+-lreadline
