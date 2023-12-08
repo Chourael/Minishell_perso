@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 12:21:57 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/08 12:43:06 by chchour          ###   ########.fr       */
+/*   Updated: 2023/12/08 17:34:24 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main(void)
 	user_input = NULL;
 	while (1)
 	{
-		user_input = readline("");
+		user_input = readline("input here : ");
 		if (verif_input(user_input) == 1)
 		{
 			free(user_input);
