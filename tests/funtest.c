@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   funtest.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 12:21:57 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/08 17:34:24 by chchour          ###   ########.fr       */
+/*   Updated: 2023/12/10 17:21:48 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+//#include <readline/readline.h>
+// #include <readline/history.h>
 
 int	input_len(char *input)
 {
