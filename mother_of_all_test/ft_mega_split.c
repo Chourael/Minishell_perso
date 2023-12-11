@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_mega_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jofrache <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:20:00 by jofrache          #+#    #+#             */
-/*   Updated: 2022/12/22 15:42:38 by chchour          ###   ########.fr       */
+/*   Updated: 2023/12/11 17:29:55 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "MOAT.h"
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
 
 static int	ft_counttab(char const *s, char c)
 {
@@ -33,19 +43,23 @@ static int	ft_counttab(char const *s, char c)
 	return (ntab);
 }
 
-static char	*ft_tab(char const *s, char c, int *o)
+static char	*ft_tab(char const *s, char c, int *o, char *input)
 {
 	int		i;
 	int		size;
+	int		len_input;
+	int		j;
 	char	*tab;
 
 	i = 0;
+	j = 0;
 	size = 0;
 	while (s[(*o)] == c && s[(*o)])
 		(*o)++;
 	while (s[(*o) + size] != c && s[(*o) + size])
 		size++;
-	tab = malloc(sizeof(char) * (size + 1));
+	len_input = ft_strlen(input);
+	tab = malloc(sizeof(char) * (size + len_input + 1));
 	if (!tab)
 		return (NULL);
 	while (i < size)
@@ -54,11 +68,17 @@ static char	*ft_tab(char const *s, char c, int *o)
 		i++;
 		(*o)++;
 	}
+	while (i < size + len_input)
+	{
+		tab[i] = input[j];
+		i++;
+		j++;
+	}
 	tab[i] = '\0';
 	return (tab);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c, char *input)
 {
 	int		i;
 	int		o;
@@ -73,7 +93,7 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	while (++i < ft_counttab(s, c))
 	{
-		tabtab[i] = ft_tab(s, c, &o);
+		tabtab[i] = ft_tab(s, c, &o, input);
 		if (!tabtab[i])
 		{
 			while (i >= 0)
