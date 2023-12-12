@@ -32,3 +32,6 @@ valgrind --suppressions=readline.supp --track-fds=yes --leak-check=full --show-l
 
 pour compiler avec readline
 -lreadline
+
+tuto write your own shell in c
+https://www.youtube.com/watch?v=cIBmeEpsMj0&list=PLxIRFba3rzLzxxZMMbrm_-mkI7mV9G0pj
