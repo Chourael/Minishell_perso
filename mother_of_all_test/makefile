@@ -6,7 +6,7 @@
 #    By: chourael <chourael@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 17:13:51 by chourael          #+#    #+#              #
-#    Updated: 2023/12/11 17:43:58 by chourael         ###   ########.fr        #
+#    Updated: 2023/12/12 13:51:49 by chourael         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = MOAT
 
 CC = cc
 
-SRCS = MOAT.c ft_mega_split.c
+SRCS = MOAT.c ft_mega_split.c libstuff.c
 
 OBJS = $(SRCS:.c=.o)
 

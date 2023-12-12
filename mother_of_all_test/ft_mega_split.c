@@ -6,21 +6,11 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:20:00 by jofrache          #+#    #+#             */
-/*   Updated: 2023/12/11 17:29:55 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:26:27 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MOAT.h"
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
 
 static int	ft_counttab(char const *s, char c)
 {
@@ -68,7 +58,7 @@ static char	*ft_tab(char const *s, char c, int *o, char *input)
 		i++;
 		(*o)++;
 	}
-	while (i < size + len_input)
+	while (input[j] != ' ' && input[j] != '\0')
 	{
 		tab[i] = input[j];
 		i++;

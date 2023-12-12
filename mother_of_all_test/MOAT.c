@@ -6,35 +6,75 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 15:08:48 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/11 18:05:07 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/12 17:31:22 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MOAT.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	ft_init(t_data *data)
 {
-	size_t	i;
-
-	i = 0;
-	while (i <= n && s1[i] == s2[i] && s1[i] && s2[i])
-		i++;
-	if (i == n)
-		return (0);
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	data->path = NULL;
+	data->allpath = NULL;
+	data->input = NULL;
+	data->cmd = NULL;
+	data->cmd_arg = NULL;
+	data->ncmd_arg = 1;
 }
 
-int	ft_ifcmd(char **all_path)
+int	ft_check_access(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while ((all_path[i]))
+	while (data->allpath[i])
 	{
-		if (access(all_path[i], F_OK) == 0)
-			execve(all_path[i], all_path, NULL);
+		if (access(data->allpath[i], F_OK) == 0)
+			return (i);
 		i++;
 	}
+	return (-1);
+}
+
+void	ft_makecmd(t_data *data)
+{
+	int	i;
+
+	i = 1;
+	data->cmd_arg = ft_split(data->input, ' ', NULL);
+	while (data->cmd_arg[i])
+	{
+		data->cmd[i] = malloc(sizeof(char) * ft_strlen(data->cmd_arg[i]) + 1);
+		ft_strlcpy(data->cmd[i], data->cmd_arg[i], ft_strlen(data->cmd_arg[i]));
+		i++;
+	}
+}
+
+int	ft_ifcmd(t_data *data)
+{
+	int		i;
+	int		n_path;
+
+	i = 0;
+	n_path = ft_check_access(data);
+	if (n_path == -1)
+	{
+		printf("this is not reconized as a cmd\n");
+		return (1);
+	}
+	while(data->input[i])
+	{
+		if (data->input[i] == ' ')
+			data->ncmd_arg++;
+		i++;
+	}
+	data->cmd = malloc(sizeof(char *) * data->ncmd_arg + 1);
+	data->cmd[data->ncmd_arg] = NULL;
+	data->cmd[0] = malloc(sizeof(char) * ft_strlen(data->input) + 1);
+	ft_strlcpy(data->cmd[0], data->allpath[n_path], ft_strlen(data->allpath[n_path]));
+	ft_makecmd(data);
+	execve(data->cmd[0], data->cmd, NULL);
+	i++;
 	return (0);
 }
 int	ft_notcmd(char *input)
@@ -65,30 +105,27 @@ int	ft_notcmd(char *input)
 	return (0);
 }
 
-void	ft_interactif(char *paths)
+void	ft_interactif(t_data *data)
 {
-	char *input;
-	char **all_path;
-
 	printf("Hello, you are in the prepreprepreprealpha version of a part of minishell\n");
 	while (1)
 	{
-		input = readline("chourashell :");
-		all_path = ft_split(paths, ':', input);
-		ft_ifcmd(all_path);
-		if (ft_notcmd(input) == 1)
+		data->input = readline("chourashell :");
+		data->allpath = ft_split(data->path, ':', data->input);
+		ft_ifcmd(data);
+		if (ft_notcmd(data->input) == 1)
 			return ;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	char *paths;
+	t_data	data;
 
-	paths = NULL;
-	paths = getenv("PATH");
+	ft_init(&data);
+	data.path = getenv("PATH");
 	if (argc == 1)
-		ft_interactif(paths);
+		ft_interactif(&data);
 	else if (argc > 1)
 	{
 		printf("argv[1]%s\n", argv[1]);
