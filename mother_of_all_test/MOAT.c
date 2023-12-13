@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 15:08:48 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/13 10:50:54 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/13 15:04:20 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,19 @@ void	ft_makecmd(t_data *data)
 	}
 }
 
+void	ft_execdacmd(t_data *data)
+{
+	int	id;
+
+	id = fork();
+	if (id == 0)
+	{
+		if (execve(data->cmd[0], data->cmd, NULL) == 1)
+			printf("exe didn't work");
+	}
+	waitpid(id, 0, 0);
+}
+
 int	ft_ifcmd(t_data *data)
 {
 	int		i;
@@ -58,10 +71,7 @@ int	ft_ifcmd(t_data *data)
 	i = 0;
 	n_path = ft_check_access(data);
 	if (n_path == -1)
-	{
-		printf("this is not reconized as a cmd\n");
 		return (1);
-	}
 	while(data->input[i])
 	{
 		if (data->input[i] == ' ')
@@ -73,12 +83,7 @@ int	ft_ifcmd(t_data *data)
 	data->cmd[0] = malloc(sizeof(char) * ft_strlen(data->input) + 1);
 	ft_strlcpy(data->cmd[0], data->allpath[n_path], ft_strlen(data->allpath[n_path]) + 1);
 	ft_makecmd(data);
-	printf("cmd[%d] = %s\n", 0, data->cmd[0]);
-	printf("cmd[%d] = %s\n", 1, data->cmd[1]);
-	printf("allpath[%d] = %s\n", n_path, data->allpath[n_path]);
-	printf("input = %s\n", data->input);
-	if (execve(data->cmd[0], data->cmd, NULL) == 1)
-		printf("exe didn't work");
+	ft_execdacmd(data);
 	return (0);
 }
 int	ft_notcmd(char *input)
@@ -86,7 +91,12 @@ int	ft_notcmd(char *input)
 	int	len;
 
 	len = ft_strlen(input);
-	if (len == 5)
+	if (len == 3)
+	{
+		if (ft_strncmp(input, "die", len) == 0)
+		return (1);
+	}
+	else if (len == 5)
 	{
 		if (ft_strncmp(input, "death", len) == 0)
 		{
@@ -127,10 +137,11 @@ void	ft_interactif(t_data *data)
 {
 	char	*inputc;
 
-	printf("Hello, you are in the prepreprepreprealpha version of a part of minishell\n");
+	printf("Hello, this is chourashell version 0.8\n");
 	while (1)
 	{
 		data->input = readline("chourashell :");
+		
 		inputc = malloc(sizeof(char) * ft_strlen(data->input) + 2);
 		ft_makeinputc(inputc, data->input);
 		data->allpath = ft_split(data->path, ':', inputc);

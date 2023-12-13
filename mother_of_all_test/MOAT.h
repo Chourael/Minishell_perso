@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 16:53:52 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/12 13:55:47 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/13 11:59:05 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 typedef struct s_data
 {
 	char 	*path;
 	char 	**allpath;
 	char 	*input;
+	char	**history;
 	char 	**cmd;
 	char 	**cmd_arg;
 	int		ncmd_arg;
