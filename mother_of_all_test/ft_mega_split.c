@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:20:00 by jofrache          #+#    #+#             */
-/*   Updated: 2023/12/12 12:26:27 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/13 10:32:42 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ static char	*ft_tab(char const *s, char c, int *o, char *input)
 		(*o)++;
 	while (s[(*o) + size] != c && s[(*o) + size])
 		size++;
-	len_input = ft_strlen(input);
+	if (input)
+		len_input = ft_strlen(input);
+	else
+		len_input = 0;
 	tab = malloc(sizeof(char) * (size + len_input + 1));
 	if (!tab)
 		return (NULL);
@@ -58,11 +61,14 @@ static char	*ft_tab(char const *s, char c, int *o, char *input)
 		i++;
 		(*o)++;
 	}
-	while (input[j] != ' ' && input[j] != '\0')
+	if (input)
 	{
-		tab[i] = input[j];
-		i++;
-		j++;
+		while (input[j] != ' ' && input[j] != '\0')
+		{
+			tab[i] = input[j];
+			i++;
+			j++;
+		}
 	}
 	tab[i] = '\0';
 	return (tab);

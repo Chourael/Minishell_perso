@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 15:08:48 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/12 17:31:22 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/13 10:50:54 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_makecmd(t_data *data)
 	while (data->cmd_arg[i])
 	{
 		data->cmd[i] = malloc(sizeof(char) * ft_strlen(data->cmd_arg[i]) + 1);
-		ft_strlcpy(data->cmd[i], data->cmd_arg[i], ft_strlen(data->cmd_arg[i]));
+		ft_strlcpy(data->cmd[i], data->cmd_arg[i], ft_strlen(data->cmd_arg[i]) + 1);
 		i++;
 	}
 }
@@ -71,10 +71,14 @@ int	ft_ifcmd(t_data *data)
 	data->cmd = malloc(sizeof(char *) * data->ncmd_arg + 1);
 	data->cmd[data->ncmd_arg] = NULL;
 	data->cmd[0] = malloc(sizeof(char) * ft_strlen(data->input) + 1);
-	ft_strlcpy(data->cmd[0], data->allpath[n_path], ft_strlen(data->allpath[n_path]));
+	ft_strlcpy(data->cmd[0], data->allpath[n_path], ft_strlen(data->allpath[n_path]) + 1);
 	ft_makecmd(data);
-	execve(data->cmd[0], data->cmd, NULL);
-	i++;
+	printf("cmd[%d] = %s\n", 0, data->cmd[0]);
+	printf("cmd[%d] = %s\n", 1, data->cmd[1]);
+	printf("allpath[%d] = %s\n", n_path, data->allpath[n_path]);
+	printf("input = %s\n", data->input);
+	if (execve(data->cmd[0], data->cmd, NULL) == 1)
+		printf("exe didn't work");
 	return (0);
 }
 int	ft_notcmd(char *input)
@@ -105,13 +109,31 @@ int	ft_notcmd(char *input)
 	return (0);
 }
 
+void	ft_makeinputc(char *inputc, char *input)
+{
+	int	i;
+
+	i = 0;
+	inputc[0] = '/';
+	while (input[i])
+	{
+		inputc[i + 1] = input[i];
+		i++;
+	}
+	inputc[i + 1] = '\0';
+}
+
 void	ft_interactif(t_data *data)
 {
+	char	*inputc;
+
 	printf("Hello, you are in the prepreprepreprealpha version of a part of minishell\n");
 	while (1)
 	{
 		data->input = readline("chourashell :");
-		data->allpath = ft_split(data->path, ':', data->input);
+		inputc = malloc(sizeof(char) * ft_strlen(data->input) + 2);
+		ft_makeinputc(inputc, data->input);
+		data->allpath = ft_split(data->path, ':', inputc);
 		ft_ifcmd(data);
 		if (ft_notcmd(data->input) == 1)
 			return ;
