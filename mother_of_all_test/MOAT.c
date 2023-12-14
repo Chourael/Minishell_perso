@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MOAT.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 15:08:48 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/13 15:04:20 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/14 14:44:24 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	ft_ifcmd(t_data *data)
 	n_path = ft_check_access(data);
 	if (n_path == -1)
 		return (1);
-	while(data->input[i])
+	while (data->input[i])
 	{
 		if (data->input[i] == ' ')
 			data->ncmd_arg++;
@@ -94,7 +94,7 @@ int	ft_notcmd(char *input)
 	if (len == 3)
 	{
 		if (ft_strncmp(input, "die", len) == 0)
-		return (1);
+			return (1);
 	}
 	else if (len == 5)
 	{
@@ -141,7 +141,6 @@ void	ft_interactif(t_data *data)
 	while (1)
 	{
 		data->input = readline("chourashell :");
-		
 		inputc = malloc(sizeof(char) * ft_strlen(data->input) + 2);
 		ft_makeinputc(inputc, data->input);
 		data->allpath = ft_split(data->path, ':', inputc);

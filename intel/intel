@@ -27,11 +27,16 @@ https://www.gnu.org/savannah-checkouts/gnu/bash/manual/
 tres court explication de shell et explication des fonction
 https://42-cursus.gitbook.io/guide/rank-03/minishell-todo/understand-minishell
 
+tuto write your own shell in c
+https://www.youtube.com/watch?v=cIBmeEpsMj0&list=PLxIRFba3rzLzxxZMMbrm_-mkI7mV9G0pj
+
+Comment lire et configurer les variables d'environnement et de shell sous Linux
+https://www.digitalocean.com/community/tutorials/how-to-read-and-set-environmental-and-shell-variables-on-linux-fr
+
 pour ne pas voir les leak non generer par notre code
 valgrind --suppressions=readline.supp --track-fds=yes --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
 
 pour compiler avec readline
 -lreadline
 
-tuto write your own shell in c
-https://www.youtube.com/watch?v=cIBmeEpsMj0&list=PLxIRFba3rzLzxxZMMbrm_-mkI7mV9G0pj
+printenv ou env cmd pour printf l'env
