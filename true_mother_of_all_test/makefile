@@ -5,16 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: chchour <chchour@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/11 17:13:51 by chourael          #+#    #+#              #
-#    Updated: 2023/12/14 17:54:23 by chchour          ###   ########.fr        #
+#    Created: 2023/12/14 17:54:13 by chchour           #+#    #+#              #
+#    Updated: 2023/12/14 20:48:04 by chchour          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = MOAT
+NAME = True_MOAT
 
 CC = cc
 
-SRCS = MOAT.c ft_mega_split.c libstuff.c
+SRCS = main.c libstuff.c cmd.c ft_mega_split.c
 
 OBJS = $(SRCS:.c=.o)
 
