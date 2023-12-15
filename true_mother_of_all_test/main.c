@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:57:05 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/15 06:44:54 by chchour          ###   ########.fr       */
+/*   Updated: 2023/12/15 11:11:24 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ int	main(void)
 			return (0);
 		else if (ft_strlen(data.input) > 2
 			&& ft_strncmp(data.input, "cmd", 3) == 0)
-		{
-			if (ft_cmd(&data) == 1)
-				return (0);
-		}
+			ft_cmd(&data);
 		else if (ft_strlen(data.input) == 4
 			&& ft_strncmp(data.input, "help", 4) == 0)
 			ft_help();

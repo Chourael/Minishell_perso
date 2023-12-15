@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 18:49:11 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/15 09:58:42 by chchour          ###   ########.fr       */
+/*   Updated: 2023/12/15 11:11:39 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,11 @@ static void	ft_fillarg(t_data *data, int access)
 	data->cmd = malloc(sizeof(char *) * i + 1);
 	data->cmd[i] = NULL;
 	i = 1;
-	while (inputsplitted[i])
+	while (inputsplitted[i + 1])
 	{
-		data->cmd[i] = malloc(sizeof(char) * ft_strlen(inputsplitted[i]) + 1);
-		ft_strlcpy(data->cmd[i], inputsplitted[i],
-			ft_strlen(inputsplitted[i]) + 1);
-		printf("cmd[%d] = %s\n", i, data->cmd[i]);
-		printf("input[%d] = %s\n", i, inputsplitted[i]);
+		data->cmd[i] = malloc(sizeof(char) * ft_strlen(inputsplitted[i + 1]) + 1);
+		ft_strlcpy(data->cmd[i], inputsplitted[i + 1],
+			ft_strlen(inputsplitted[i + 1]) + 1);
 		i++;
 	}
 	data->cmd[0] = malloc(sizeof(char) * ft_strlen(data->allpath[access]) + 1);
@@ -87,13 +85,7 @@ static int	ft_exec(t_data *data)
 
 	id = fork();
 	if (id == 0)
-	{
-		if (execve(data->cmd[0], data->cmd, NULL) == 1)
-		{
-			printf("exe didn't work");
-			return (1);
-		}
-	}
+		execve(data->cmd[0], data->cmd, NULL);
 	waitpid(id, 0, 0);
 	return (0);
 }

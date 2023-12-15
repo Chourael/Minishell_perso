@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 15:08:48 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/14 17:54:31 by chchour          ###   ########.fr       */
+/*   Updated: 2023/12/15 11:07:48 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	ft_execdacmd(t_data *data)
 	id = fork();
 	if (id == 0)
 	{
+		printf("data->cmd[0] = %s\n", data->cmd[0]);
+		printf("data->cmd[1] = %s\n", data->cmd[1]);
 		if (execve(data->cmd[0], data->cmd, NULL) == 1)
 			printf("exe didn't work");
 	}
