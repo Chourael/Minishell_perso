@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:20:00 by jofrache          #+#    #+#             */
-/*   Updated: 2023/12/14 20:55:16 by chchour          ###   ########.fr       */
+/*   Updated: 2023/12/15 06:39:35 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,21 @@ static void	ft_tabhelper(char *tab, char *input, int i, int j)
 	tab[i] = '\0';
 }
 
+static int	ft_len(char *input)
+{
+	int	len;
+
+	if (input)
+		len = ft_strlen(input);
+	else
+		len = 0;
+	return (len);
+}
+
 static char	*ft_tab(char const *s, char c, int *o, char *input)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	int		size;
 	int		len_input;
 	char	*tab;
@@ -62,10 +73,7 @@ static char	*ft_tab(char const *s, char c, int *o, char *input)
 		(*o)++;
 	while (s[(*o) + size] != c && s[(*o) + size])
 		size++;
-	if (input)
-		len_input = ft_strlen(input);
-	else
-		len_input = 0;
+	len_input = ft_len(input);
 	tab = malloc(sizeof(char) * (size + len_input + 1));
 	if (!tab)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:55:43 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/14 20:47:26 by chchour          ###   ########.fr       */
+/*   Updated: 2023/12/15 07:02:45 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_data
 {
 	char	*input;
 	char	**allpath;
+	char	**cmd;
 }				t_data;
 
 //libstuff.c
