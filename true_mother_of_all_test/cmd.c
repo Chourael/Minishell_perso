@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 18:49:11 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/15 07:38:34 by chchour          ###   ########.fr       */
+/*   Updated: 2023/12/15 09:58:42 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*ft_fillcmd(char *input, char *cmd)
 	return (cmd);
 }
 
-int	ft_access(t_data *data)
+static int	ft_access(t_data *data)
 {
 	int	i;
 
@@ -55,32 +55,47 @@ int	ft_access(t_data *data)
 	return (-1);
 }
 
-void	ft_fillarg(t_data *data)
+static void	ft_fillarg(t_data *data, int access)
 {
-	int	i;
-	int	o;
-	int	size;
+	char	**inputsplitted;
+	int		i;
 
 	i = 0;
-	size = 1;
-	while (data->input[i])
-	{
-		if (data->input[i] = ' ')
-			size++;
-		i++;	
-	}
-	data->cmd = malloc(sizeof(char *) * size + 1);
+	inputsplitted = ft_split(data->input, ' ', NULL);
+	while (inputsplitted[i])
+		i++;
+	data->cmd = malloc(sizeof(char *) * i + 1);
+	data->cmd[i] = NULL;
 	i = 1;
-	o = 0;
-	while (data->cmd[i])
+	while (inputsplitted[i])
 	{
-		
+		data->cmd[i] = malloc(sizeof(char) * ft_strlen(inputsplitted[i]) + 1);
+		ft_strlcpy(data->cmd[i], inputsplitted[i],
+			ft_strlen(inputsplitted[i]) + 1);
+		printf("cmd[%d] = %s\n", i, data->cmd[i]);
+		printf("input[%d] = %s\n", i, inputsplitted[i]);
+		i++;
 	}
+	data->cmd[0] = malloc(sizeof(char) * ft_strlen(data->allpath[access]) + 1);
+	ft_strlcpy(data->cmd[0], data->allpath[access],
+		ft_strlen(data->allpath[access]) + 1);
 }
 
-int	ft_exec(t_data *data)
+static int	ft_exec(t_data *data)
 {
-	
+	int	id;
+
+	id = fork();
+	if (id == 0)
+	{
+		if (execve(data->cmd[0], data->cmd, NULL) == 1)
+		{
+			printf("exe didn't work");
+			return (1);
+		}
+	}
+	waitpid(id, 0, 0);
+	return (0);
 }
 
 int	ft_cmd(t_data *data)
@@ -98,10 +113,10 @@ int	ft_cmd(t_data *data)
 	access = ft_access(data);
 	if (access == -1)
 	{
-		printf("cannot access the cmd\n")
+		printf("cannot access the cmd\n");
 		return (1);
 	}
-	ft_fillarg(data);
-	ft_exec(data, access);
+	ft_fillarg(data, access);
+	ft_exec(data);
 	return (0);
 }
