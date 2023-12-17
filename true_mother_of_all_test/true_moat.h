@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   true_moat.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:55:43 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/15 07:02:45 by chchour          ###   ########.fr       */
+/*   Updated: 2023/12/17 17:44:56 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ int		ft_strlen(char *str);
 char	**ft_split(char const *s, char c, char *input);
 //cmd.c
 int		ft_cmd(t_data *data);
+//help.c
+void	ft_help(void);
 
 #endif

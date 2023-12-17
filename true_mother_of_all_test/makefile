@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chchour <chchour@student.42.fr>            +#+  +:+       +#+         #
+#    By: chourael <chourael@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 17:54:13 by chchour           #+#    #+#              #
-#    Updated: 2023/12/14 20:48:04 by chchour          ###   ########.fr        #
+#    Updated: 2023/12/17 17:49:27 by chourael         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = True_MOAT
 
 CC = cc
 
-SRCS = main.c libstuff.c cmd.c ft_mega_split.c
+SRCS = main.c libstuff.c cmd.c ft_mega_split.c help.c
 
 OBJS = $(SRCS:.c=.o)
 
