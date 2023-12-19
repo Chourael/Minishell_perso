@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mega_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:20:00 by jofrache          #+#    #+#             */
-/*   Updated: 2023/12/15 06:39:35 by chchour          ###   ########.fr       */
+/*   Updated: 2023/12/19 12:17:10 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,15 @@ static int	ft_counttab(char const *s, char c)
 	return (ntab);
 }
 
-static void	ft_tabhelper(char *tab, char *input, int i, int j)
+static void	ft_tabhelper(char *tab, char *cmd, int i, int j)
 {
-	if (input)
+	if (cmd)
 	{
-		while (input[j] != ' ' && input[j] != '\0')
+		tab[i] = '/';
+		i++;
+		while (cmd[j] != ' ' && cmd[j] != '\0')
 		{
-			tab[i] = input[j];
+			tab[i] = cmd[j];
 			i++;
 			j++;
 		}
@@ -47,23 +49,23 @@ static void	ft_tabhelper(char *tab, char *input, int i, int j)
 	tab[i] = '\0';
 }
 
-static int	ft_len(char *input)
+static int	ft_len(char *cmd)
 {
 	int	len;
 
-	if (input)
-		len = ft_strlen(input);
+	if (cmd)
+		len = ft_strlen(cmd);
 	else
 		len = 0;
 	return (len);
 }
 
-static char	*ft_tab(char const *s, char c, int *o, char *input)
+static char	*ft_tab(char const *s, char c, int *o, char *cmd)
 {
 	int		i;
 	int		j;
 	int		size;
-	int		len_input;
+	int		len_cmd;
 	char	*tab;
 
 	i = 0;
@@ -73,8 +75,8 @@ static char	*ft_tab(char const *s, char c, int *o, char *input)
 		(*o)++;
 	while (s[(*o) + size] != c && s[(*o) + size])
 		size++;
-	len_input = ft_len(input);
-	tab = malloc(sizeof(char) * (size + len_input + 1));
+	len_cmd = ft_len(cmd);
+	tab = malloc(sizeof(char) * (size + len_cmd + 2));
 	if (!tab)
 		return (NULL);
 	while (i < size)
@@ -83,11 +85,11 @@ static char	*ft_tab(char const *s, char c, int *o, char *input)
 		i++;
 		(*o)++;
 	}
-	ft_tabhelper(tab, input, i, j);
+	ft_tabhelper(tab, cmd, i, j);
 	return (tab);
 }
 
-char	**ft_split(char const *s, char c, char *input)
+char	**ft_split(char const *s, char c, char *cmd)
 {
 	int		i;
 	int		o;
@@ -102,7 +104,7 @@ char	**ft_split(char const *s, char c, char *input)
 		return (NULL);
 	while (++i < ft_counttab(s, c))
 	{
-		tabtab[i] = ft_tab(s, c, &o, input);
+		tabtab[i] = ft_tab(s, c, &o, cmd);
 		if (!tabtab[i])
 		{
 			while (i >= 0)

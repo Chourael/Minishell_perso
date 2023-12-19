@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:57:05 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/17 17:51:45 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/19 12:12:56 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 static void	ft_init(t_data *data)
 {
 	data->input = NULL;
+	data->path = getenv("PATH");
+	data->allpath = NULL;
+	data->allcmd = NULL;
 }
 
 int	main(void)
@@ -31,10 +34,7 @@ int	main(void)
 			return (0);
 		else if (ft_strlen(data.input) > 2
 			&& ft_strncmp(data.input, "cmd", 3) == 0)
-			ft_cmd(&data);
-		else if (ft_strlen(data.input) > 2
-			&& ft_strncmp(data.input, "cmd|", 3) == 0)
-			ft_cmdpipe(&data);
+			ft_cmds(&data);
 		else if (ft_strlen(data.input) == 4
 			&& ft_strncmp(data.input, "help", 4) == 0)
 			ft_help();
