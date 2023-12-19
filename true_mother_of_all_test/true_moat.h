@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:55:43 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/19 12:18:22 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:50:57 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_data
 	int		ncmd;
 	char	*input;
 	char	*path;
+	char	**cmds;
 	char	**allpath;
 	char	**cmdpath;
 	char	***allcmd;
@@ -38,7 +39,7 @@ int		ft_strlen(char *str);
 //ft_mega_split.c
 char	**ft_split(char const *s, char c, char *input);
 //cmd.c
-int		ft_cmd(t_data *data);
+int		ft_cmds(t_data *data);
 //help.c
 void	ft_help(void);
 

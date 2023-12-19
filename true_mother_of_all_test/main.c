@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:57:05 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/19 12:12:56 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:00:19 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 static void	ft_init(t_data *data)
 {
+	data->ncmd = 1;
 	data->input = NULL;
 	data->path = getenv("PATH");
 	data->allpath = NULL;
 	data->allcmd = NULL;
+	data->cmds = NULL;
+	data->cmdpath = NULL;
+	data->cmds = NULL;
 }
 
 int	main(void)

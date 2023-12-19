@@ -6,7 +6,7 @@
 #    By: chourael <chourael@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 17:54:13 by chchour           #+#    #+#              #
-#    Updated: 2023/12/17 17:49:27 by chourael         ###   ########.fr        #
+#    Updated: 2023/12/19 16:51:03 by chourael         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = True_MOAT
 
 CC = cc
 
-SRCS = main.c libstuff.c cmd.c ft_mega_split.c help.c
+SRCS = main.c libstuff.c cmds.c ft_mega_split.c help.c
 
 OBJS = $(SRCS:.c=.o)
 
