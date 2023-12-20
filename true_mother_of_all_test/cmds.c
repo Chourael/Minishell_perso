@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 12:09:09 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/19 17:16:14 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:21:59 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	ft_malloccmds(t_data *data)
 		size = 1;
 		while(data->input[i++] != ' ' && data->input[i])
 			size++;
-		data->cmds[o] = malloc(sizeof(char) * size + 1);
+		data->cmds[o] = malloc(sizeof(char) * (size + 1));
 		if (data->cmds[o] == NULL)
 		{
 			printf("malloc error\n");
@@ -78,18 +78,19 @@ static int	ft_malloccmds(t_data *data)
 int	ft_cmds(t_data *data)
 {
 	ft_ncmd(data);
-	data->cmds = malloc(sizeof(char *) * data->ncmd + 1);
-	if (data->cmds == NULL)
-	{
-		printf("malloc error\n");
+	if (ft_initcmds(data) == 1)
 		return (1);
-	}
-	data->cmds[data->ncmd] = NULL;
 	if (ft_malloccmds(data) == 1)
 		return (1);
 	ft_fillcmds(data);
-	int	i = -1;
-	while (data->cmds[i++])
+	if (ft_paths(data) == 1)
+		return (1);
+	int	i = 0;
+	while (i <= data->ncmd)
+	{
 		printf("cmds[%d] = %s\n", i, data->cmds[i]);
+		printf("cmdpath[%d] = %s\n", i, data->cmdpath[i]);
+		i++;
+	}
 	return (0);
 }

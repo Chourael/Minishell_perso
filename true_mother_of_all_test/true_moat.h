@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:55:43 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/19 16:50:57 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:39:25 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,20 @@ typedef struct s_data
 }				t_data;
 
 //libstuff.c
-size_t	ft_strlcpy(char *dst, char *src, size_t size);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t	ft_strlcpy(char *dst, char *src, size_t size);
+char	*ft_strjoin(char *s1, char *s2);
 int		ft_strlen(char *str);
 //ft_mega_split.c
 char	**ft_split(char const *s, char c, char *input);
-//cmd.c
+//cmds.c
 int		ft_cmds(t_data *data);
 //help.c
 void	ft_help(void);
+//paths.c
+int		ft_paths(t_data *data);
+//init.c
+int		ft_initcmdpath(t_data *data);
+int		ft_initcmds(t_data *data);
 
 #endif
