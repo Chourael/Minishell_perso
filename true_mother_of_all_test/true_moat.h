@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:55:43 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/20 14:39:25 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:03:11 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_data
 	char	**cmds;
 	char	**allpath;
 	char	**cmdpath;
-	char	***allcmd;
+	char	***fullcmd;
 }				t_data;
 
 //libstuff.c
