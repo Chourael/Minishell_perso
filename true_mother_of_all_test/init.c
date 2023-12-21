@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:35:10 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/20 18:15:36 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:57:19 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_initcmds(t_data *data)
 	data->cmds = malloc(sizeof(char *) * (data->ncmd + 1));
 	if (data->cmds == NULL)
 	{
-		printf("malloc error\n");
+		printf("malloc error 0\n");
 		return (1);
 	}
 	while (i <= data->ncmd)

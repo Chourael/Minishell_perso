@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 12:09:09 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/21 12:36:56 by chchour          ###   ########.fr       */
+/*   Updated: 2023/12/21 14:21:05 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ static int	ft_malloccmds(t_data *data)
 	while (data->input[i])
 	{
 		size = 1;
-		while (data->input[i++] != ' ' && data->input[i])
+		while (data->input[i] && data->input[i++] != ' ')
 			size++;
 		data->cmds[o] = malloc(sizeof(char) * (size + 1));
 		if (data->cmds[o] == NULL)
 		{
-			printf("malloc error\n");
+			printf("malloc error 1\n");
 			return (1);
 		}
 		data->cmds[o][size - 1] = '\0';
@@ -83,14 +83,15 @@ int	ft_cmds(t_data *data)
 	if (ft_malloccmds(data) == 1)
 		return (1);
 	ft_fillcmds(data);
-	if (ft_paths(data) == 1)
-		return (1);
 	int	i = 0;
 	while (i <= data->ncmd)
 	{
 		printf("cmds[%d] = %s\n", i, data->cmds[i]);
-		printf("cmdpath[%d] = %s\n", i, data->cmdpath[i]);
 		i++;
 	}
+	if (ft_paths(data) == 1)
+		return (1);
+	if (ft_fullcmd(data) == 1)
+		return (1);
 	return (0);
 }

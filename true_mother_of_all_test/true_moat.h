@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   true_moat.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:55:43 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/20 18:03:11 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:08:04 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ int		ft_paths(t_data *data);
 //init.c
 int		ft_initcmdpath(t_data *data);
 int		ft_initcmds(t_data *data);
+//fullcmd.c
+int		ft_fullcmd(t_data *data);
 
 #endif
