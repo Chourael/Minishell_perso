@@ -6,11 +6,35 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:35:10 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/21 12:57:19 by chchour          ###   ########.fr       */
+/*   Updated: 2023/12/21 14:46:59 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "true_moat.h"
+
+void	ft_initfullcmd2tab(t_data * data, int i, int size)
+{
+	int	o;
+
+	o = 0;
+	while (o <= size)
+	{
+		data->fullcmd[i][o] = NULL;
+		o++;
+	}
+}
+
+void	ft_initfullcmd3tab(t_data * data)
+{
+	int	i;
+
+	i = 0;
+	while (i <= data->ncmd)
+	{
+		data->fullcmd[i] = NULL;
+		i++;
+	}
+}
 
 int	ft_initcmdpath(t_data *data)
 {

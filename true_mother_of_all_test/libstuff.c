@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   libstuff.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:51:09 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/20 11:57:00 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:41:50 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <true_moat.h>
+
+void	*ft_memset(void *s, int c, size_t n)
+{
+	unsigned char	*p;
+
+	p = s;
+	while (n--)
+		*p++ = (unsigned char)c;
+	return (s);
+}
 
 static char	*ft_norm(void)
 {

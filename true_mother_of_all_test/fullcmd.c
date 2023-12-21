@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 16:16:02 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/21 14:15:07 by chchour          ###   ########.fr       */
+/*   Updated: 2023/12/21 16:41:19 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int	ft_tabtabsize(char **insp, int i)
 
 	o = 0;
 	size = -1;
-	while(insp[i][o])
+	while(insp[i][o] != '\0')
 	{
-		if (insp[i][o] == ' ' || insp[i][o] == '\0')
+		if (insp[i][o] == ' ' || insp[i][o + 1] == '\0')
 			size++;
 		o++;
 	}
@@ -39,7 +39,12 @@ static int	ft_malloctabsize(t_data *data, char **insp, int tabtabsize, int i)
 	j = 0;
 	tabsize = 0;
 	while (insp[i][j] != '\0' && insp[i][j++] != ' ')
-	while (insp[i][j] != '\0' && insp[i][j++] != ' ')
+	{}
+	if (i < data->ncmd - 1)
+	{
+		while (insp[i][j] != '\0' && insp[i][j++] != ' ')
+		{}
+	}
 	while (o < tabtabsize)
 	{
 		while(insp[i][j] != ' ' && insp[i][j])
@@ -51,10 +56,10 @@ static int	ft_malloctabsize(t_data *data, char **insp, int tabtabsize, int i)
 		if (data->fullcmd[i][o] == NULL)
 			return (1);
 		data->fullcmd[i][o][tabsize] = '\0';
+		ft_memset(data->fullcmd[i][o], '\0', tabsize + 1);
 		o++;
 		j++;
 		printf("tabsize = %d\n", tabsize);
-		printf("o = %d\n", o);
 	}
 	return (0);
 }
@@ -70,14 +75,15 @@ static int	ft_mallocfullcmd(t_data *data)
 	data->fullcmd = malloc(sizeof(char **) * (data->ncmd + 1));
 	if (data->fullcmd == NULL)
 		return (1);
-	data->fullcmd[data->ncmd] = NULL;
+	ft_initfullcmd3tab(data);
 	printf("tabtabtabsize = %d\n", data->ncmd);
-	while (i <= data->ncmd)
+	while (i < data->ncmd)
 	{
 		tabtabsize = ft_tabtabsize(inputsplited, i);
 		data->fullcmd[i] = malloc(sizeof(char *) * (tabtabsize + 1));
 		if (data->fullcmd[i] == NULL)
 			return (1);
+		ft_initfullcmd2tab(data, i, tabtabsize);
 		if (ft_malloctabsize(data, inputsplited, tabtabsize, i) == 1)
 			return (1);
 		i++;
