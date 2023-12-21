@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 12:09:09 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/20 15:21:59 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:36:56 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ static void	ft_fillcmds(t_data *data)
 	o = 0;
 	while (data->input[i - 1] != ' ' && data->input[i])
 		i++;
-	while(data->input[i])
+	while (data->input[i])
 	{
 		j = 0;
-		while(data->input[i] != ' ' && data->input[i])
+		while (data->input[i] != ' ' && data->input[i])
 			data->cmds[o][j++] = data->input[i++];
 		o++;
-		while(data->input[i - 2] != '|' && data->input[i])
+		while (data->input[i - 2] != '|' && data->input[i])
 			i++;
 	}
 }
@@ -56,10 +56,10 @@ static int	ft_malloccmds(t_data *data)
 	o = 0;
 	while (data->input[i - 1] != ' ' && data->input[i] != '\0')
 		i++;
-	while(data->input[i])
+	while (data->input[i])
 	{
 		size = 1;
-		while(data->input[i++] != ' ' && data->input[i])
+		while (data->input[i++] != ' ' && data->input[i])
 			size++;
 		data->cmds[o] = malloc(sizeof(char) * (size + 1));
 		if (data->cmds[o] == NULL)
@@ -69,7 +69,7 @@ static int	ft_malloccmds(t_data *data)
 		}
 		data->cmds[o][size - 1] = '\0';
 		o++;
-		while(data->input[i - 2] != '|' && data->input[i])
+		while (data->input[i - 2] != '|' && data->input[i])
 			i++;
 	}
 	return (0);

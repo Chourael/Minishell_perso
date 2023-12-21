@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 11:25:52 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/20 15:30:30 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:36:31 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	ft_cpy(t_data *data, int path, int cmd)
 {
 	int	i;
-	
+
 	i = 0;
 	while (data->allpath[path][i])
 	{
@@ -41,13 +41,14 @@ int	ft_paths(t_data *data)
 		{
 			if (access(data->allpath[i], F_OK) == 0)
 			{
-				data->cmdpath[o] = malloc(sizeof(char) * (ft_strlen(data->allpath[i]) + 1));
+				data->cmdpath[o] = malloc(sizeof(char)
+						* (ft_strlen(data->allpath[i]) + 1));
 				ft_cpy(data, i, o);
 				o++;
-				break;
+				break ;
 			}
 			i++;
-			if(data->allpath[i] == NULL)
+			if (data->allpath[i] == NULL)
 			{
 				printf("acces error\n");
 				return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fullcmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 16:16:02 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/20 18:24:22 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:38:59 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	ft_tabtabsize(t_data *data, int i)
 {
 	int	o;
+	int	size;
 
 	o = 0;
 	
@@ -24,7 +25,7 @@ static int	ft_mallocfullcmd(t_data *data)
 {
 	int	i;
 	int	tabtabsize;
-	
+
 	i = 0;
 	data->fullcmd = malloc(sizeof(char **) * (data->ncmd + 1));
 	if (data->fullcmd == NULL)
@@ -39,9 +40,7 @@ static int	ft_mallocfullcmd(t_data *data)
 	}
 }
 
-int ft_allcmd(t_data *data)
+int	ft_allcmd(t_data *data)
 {
-	int	argn;
-	
 	ft_mallocfullcmd(data);
 }
