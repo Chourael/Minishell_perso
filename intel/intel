@@ -33,6 +33,9 @@ https://www.youtube.com/watch?v=cIBmeEpsMj0&list=PLxIRFba3rzLzxxZMMbrm_-mkI7mV9G
 Comment lire et configurer les variables d'environnement et de shell sous Linux
 https://www.digitalocean.com/community/tutorials/how-to-read-and-set-environmental-and-shell-variables-on-linux-fr
 
+minishell de nokosse
+https://github.com/nokosse/minishell2/tree/main
+
 pour ne pas voir les leak non generer par notre code
 valgrind --suppressions=readline.supp --track-fds=yes --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
 

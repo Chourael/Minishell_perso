@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fullcmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 16:16:02 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/21 16:41:19 by chchour          ###   ########.fr       */
+/*   Updated: 2023/12/22 12:57:09 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static int	ft_malloctabsize(t_data *data, char **insp, int tabtabsize, int i)
 		data->fullcmd[i][o] = malloc(sizeof(char) * (tabsize + 1));
 		if (data->fullcmd[i][o] == NULL)
 			return (1);
-		data->fullcmd[i][o][tabsize] = '\0';
 		ft_memset(data->fullcmd[i][o], '\0', tabsize + 1);
 		o++;
 		j++;
