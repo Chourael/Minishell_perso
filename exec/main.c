@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:15:23 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/25 13:34:13 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/25 18:12:12 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int	ft_len(char ***cmds)
 
 int	ft_cmds(char ***cmds)
 {
-	int	id;
+	int		id;
 	int		pipe1[2];
 	int		pipe2[2];
-	int saved_stdin = dup(STDIN_FILENO);
-	int saved_stdout = dup(STDOUT_FILENO);
-	int	i;
+	int 	saved_stdin = dup(STDIN_FILENO);
+	int		saved_stdout = dup(STDOUT_FILENO);
+	int		i;
 
 	printf("start cmds\n");
 	if (pipe(pipe1) == -1 || pipe(pipe2) == -1)
@@ -57,20 +57,24 @@ int	ft_cmds(char ***cmds)
 				if (i % 2 == 1)
 				{
 					printf("yo2 i = %d\n", i);
-					dup2(saved_stdin, STDIN_FILENO);
+					if (dup2(saved_stdin, STDIN_FILENO) == -1)
+						perror("dup");
 					if (dup2(pipe1[0], STDIN_FILENO) == - 1)
 						perror("dup");
-					dup2(saved_stdout, STDOUT_FILENO);
+					if (dup2(saved_stdout, STDOUT_FILENO) == -1)
+						perror("dup");
 					if (dup2(pipe2[1], STDOUT_FILENO) == - 1)
 						perror("dup");
 				}
 				else
 				{
 					printf("yo3 i = %d\n", i);;
-					dup2(saved_stdin, STDIN_FILENO);
+					if (dup2(saved_stdin, STDIN_FILENO) == -1)
+						perror("dup");
 					if (dup2(pipe2[0], STDIN_FILENO) == - 1)
 						perror("dup");
-					dup2(saved_stdout, STDOUT_FILENO);
+					if (dup2(saved_stdout, STDOUT_FILENO) == -1)
+						perror("dup");
 					if (dup2(pipe1[1], STDOUT_FILENO) == - 1)
 						perror("dup");
 				}
@@ -80,14 +84,16 @@ int	ft_cmds(char ***cmds)
 				if (i % 2 == 0)
 				{
 					printf("yo4 i = %d\n", i);
-					dup2(saved_stdin, STDIN_FILENO);
+					if (dup2(saved_stdin, STDIN_FILENO) == -1)
+						perror("dup");
 					if (dup2(pipe2[0], STDIN_FILENO) == -1)
 						perror("dup");
 				}
 				else
 				{
 					printf("yo5\n i = %d", i);
-					dup2(saved_stdin, STDIN_FILENO);
+					if (dup2(saved_stdin, STDIN_FILENO) == -1)
+						perror("dup");
 					if (dup2(pipe1[0], STDIN_FILENO) == -1)
 						perror("dup");
 				}
@@ -96,9 +102,12 @@ int	ft_cmds(char ***cmds)
 			close(pipe1[1]);
 			close(pipe2[0]);
 			close(pipe2[1]);
-			if (execve(cmds[i][0], cmds[i], NULL) == 1)
+			if (execve(cmds[i][0], cmds[i], NULL) == -1)
+			{
+				dup2(saved_stdout, STDOUT_FILENO);
 				perror("exec");
-			return (1);
+				return (1);
+			}
 		}
 		else
 		{
@@ -177,10 +186,10 @@ int	ft_1cmd(char ***cmds)
 int main()
 {
 	// char	*cmd[] = {"/usr/bin/ls", "-l", NULL};
-	char	*cmd1[] = {"/usr/bin/grep", "test", NULL};
+	char	*cmd1[] = {"/usr/bin/grep", "if", NULL};
 	// char	*cmd2[] = {"/usr/bin/wc", "-l", NULL};
 	char	*cmd3[] = {"/usr/bin/echo", "This is a test input", NULL};
-	char	*cmd4[] = {"/usr/bin/cat", NULL};
+	char	*cmd4[] = {"/usr/bin/cat", "main.c", NULL};
 	char	*cmd5[] = {"usr/bin/sed", "s/test/replaced", NULL};
 	char	*cmd6[] = {"/usrbin/tee", "output.txt", NULL};
 	char	**cmds[] = {cmd3, cmd4, cmd1, cmd5, cmd6, NULL};
