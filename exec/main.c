@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:15:23 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/25 18:12:12 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/26 22:42:33 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ int	ft_cmds(char ***cmds)
 		}
 		else
 		{
-			waitpid(id, 0, 0);
 			i++;
 		}
 	}
@@ -144,7 +143,6 @@ int	ft_2cmd(char ***cmds)
 			return (1);
 		}
 	}
-	wait(NULL);
 	if ((id = fork()) == -1)
 		perror("fork");
 	if (id == 0)
@@ -187,12 +185,12 @@ int main()
 {
 	// char	*cmd[] = {"/usr/bin/ls", "-l", NULL};
 	char	*cmd1[] = {"/usr/bin/grep", "if", NULL};
-	// char	*cmd2[] = {"/usr/bin/wc", "-l", NULL};
-	char	*cmd3[] = {"/usr/bin/echo", "This is a test input", NULL};
+	char	*cmd2[] = {"/usr/bin/wc", "-l", NULL};
+	// char	*cmd3[] = {"/usr/bin/echo", "This is a test input", NULL};
 	char	*cmd4[] = {"/usr/bin/cat", "main.c", NULL};
-	char	*cmd5[] = {"usr/bin/sed", "s/test/replaced", NULL};
-	char	*cmd6[] = {"/usrbin/tee", "output.txt", NULL};
-	char	**cmds[] = {cmd3, cmd4, cmd1, cmd5, cmd6, NULL};
+	// char	*cmd5[] = {"usr/bin/sed", "s/test/replaced", NULL};
+	char	*cmd6[] = {"/usr/bin/tee", "output.txt", NULL};
+	char	**cmds[] = {cmd4, cmd1, cmd2, cmd6, NULL};
 
 	printf("start main\n");
 	if (ft_len(cmds) < 1)
