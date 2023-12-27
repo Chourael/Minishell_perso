@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:42:41 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/26 23:26:42 by chchour          ###   ########.fr       */
+/*   Updated: 2023/12/27 12:58:59 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,14 +208,14 @@ int	ft_exec(char ***cmds)
 
 int	main(void)
 {
-	// char	*cmd[] = {"/usr/bin/ls", "-l", NULL};
-	char	*cmd1[] = {"/usr/bin/grep", "replaced", NULL};
-	// char	*cmd2[] = {"/usr/bin/wc", "-l", NULL};
-	// char	*cmd3[] = {"/usr/bin/echo", "This is a test input", NULL};
-	char	*cmd4[] = {"/usr/bin/cat", "main.c", NULL};
-	char	*cmd5[] = {"/usr/bin/sed", "s/if/replaced/", NULL};
-	// char	*cmd6[] = {"/usr/bin/tee", "output.txt", NULL};
-	char	**cmds[] = {cmd4, cmd5, cmd1, NULL};
+	// char	*ls[] = {"/usr/bin/ls", "-l", NULL};
+	char	*grep[] = {"/usr/bin/grep", "replaced", NULL};
+	char	*wc[] = {"/usr/bin/wc", "-l", NULL};
+	// char	*echo[] = {"/usr/bin/echo", "This is a test input", NULL};
+	char	*cat[] = {"/usr/bin/cat", "main.c", NULL};
+	char	*sed[] = {"/usr/bin/sed", "s/if/replaced/", NULL};
+	// char	*tee[] = {"/usr/bin/tee", "output.txt", NULL};
+	char	**cmds[] = {cat, sed, grep, wc, NULL};
 
 	if (ft_exec(cmds) == -1)
 		return (1);
