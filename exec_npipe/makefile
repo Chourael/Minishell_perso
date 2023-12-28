@@ -6,7 +6,7 @@
 #    By: chourael <chourael@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 17:54:13 by chchour           #+#    #+#              #
-#    Updated: 2023/12/28 16:35:39 by chourael         ###   ########.fr        #
+#    Updated: 2023/12/28 17:13:16 by chourael         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = exec
 
 CC = cc
 
-SRCS = exec-main.c lastcmd.c firstcmd.c middlecmd.c malloc-close_pipes.c
+SRCS = exec-main.c lastcmd.c firstcmd.c middlecmd.c 1cmd.c make-close_pipes.c
 
 OBJS = $(SRCS:.c=.o)
 

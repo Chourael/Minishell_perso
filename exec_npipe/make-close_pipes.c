@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc-close_pipes.c                               :+:      :+:    :+:   */
+/*   make-close_pipes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:50:37 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/28 16:31:51 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:46:39 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	**ft_mallocpipes(int size)
 	int	i;
 	int	**pipes;
 
-	printf("start mallocpipes\n");
 	i = 0;
 	pipes = malloc(sizeof(int *) * size);
 	if (pipes == NULL)
@@ -50,6 +49,28 @@ int	**ft_mallocpipes(int size)
 		}
 		i++;
 	}
-	printf("end mallocpipes\n");
+	return (pipes);
+}
+
+int	**ft_makepipes(int size)
+{
+	int	i;
+	int	**pipes;
+
+	printf("start makepipes\n");
+	i = 0;
+	pipes = ft_mallocpipes(size);
+	if (pipes == NULL)
+		return (-1);
+	while (i < size)
+	{
+		if (pipe(pipes[i]) == -1)
+		{
+			perror("pipes");
+			return (-1);
+		}
+		i++;
+	}
+	printf("end makepipes\n");
 	return (pipes);
 }
