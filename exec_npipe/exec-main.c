@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:42:41 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/28 15:18:52 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/28 16:36:28 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	ft_exec(char ***cmds)
 {
 	int	i;
 	int	**pipes;
-	int	id;
 	int	stdout;
 
 	printf("start ft_exec\n");
@@ -71,7 +70,7 @@ int	ft_exec(char ***cmds)
 	}
 	if (ft_firstcmd(cmds[0], pipes[0], stdout) == -1)
 		return (-1);
-	if ((i = ft_middlecmd(cmds, pipes, stdout, id)) == -1)
+	if ((i = ft_middlecmd(cmds, pipes, stdout)) == -1)
 		return (-1);
 	if (ft_lastcmd(cmds, pipes, i) == -1)
 		return (-1);
@@ -86,7 +85,7 @@ int	main(void)
 	char	*grep[] = {"/usr/bin/grep", "replaced", NULL};
 	char	*wc[] = {"/usr/bin/wc", "-l", NULL};
 	// char	*echo[] = {"/usr/bin/echo", "This is a test input", NULL};
-	char	*cat[] = {"/usr/bin/cat", "main.c", NULL};
+	char	*cat[] = {"/usr/bin/cat", "exec-main.c", NULL};
 	char	*sed[] = {"/usr/bin/sed", "s/if/replaced/", NULL};
 	// char	*tee[] = {"/usr/bin/tee", "output.txt", NULL};
 	char	**cmds[] = {cat, sed, grep, wc, NULL};

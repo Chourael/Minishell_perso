@@ -6,13 +6,13 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:50:37 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/28 15:06:43 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/28 16:31:51 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-void ft_closepipes(int	**pipes, int size)
+void	ft_closepipes(int	**pipes, int size)
 {
 	int	i;
 

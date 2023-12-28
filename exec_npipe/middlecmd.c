@@ -6,16 +6,18 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:07:28 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/28 15:19:16 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/28 16:33:01 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	ft_middlecmd(char ***cmds, int **pipes, int stdout, int id)
+int	ft_middlecmd(char ***cmds, int **pipes, int stdout)
 {
+	int	id;
 	int	i;
 
+	printf("start middlecmd\n");
 	i = 1;
 	while(cmds[i + 1] != NULL && cmds[i])
 	{
@@ -33,10 +35,10 @@ int	ft_middlecmd(char ***cmds, int **pipes, int stdout, int id)
 				perror("exec");
 				return (-1);
 			}
-			return (0);
 		}
 		else
 			i++;
 	}
+	printf("end middlecmd\n");
 	return (i);
 }
