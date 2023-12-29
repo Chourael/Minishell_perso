@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:17:17 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/29 12:20:23 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/29 12:26:53 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	ft_firstcmd(char **cmd, int	*firstpipe, int stdout, int *redirect)
 {
 	int	id;
 
-	printf("start firstcmd\n");
 	if ((id = fork()) == -1)
 	{
 		perror("fork");
@@ -66,6 +65,5 @@ int	ft_firstcmd(char **cmd, int	*firstpipe, int stdout, int *redirect)
 	}
 	else
 		wait(NULL);
-	printf("end firstcmd\n");
 	return (0);
 }

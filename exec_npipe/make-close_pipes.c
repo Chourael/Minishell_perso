@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:50:37 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/29 12:21:04 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/29 12:26:40 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_closepipes(int	**pipes, int size)
 {
 	int	i;
 
-	printf("start closepipes\n");
 	i = 0;
 	while (i < size)
 	{
@@ -24,7 +23,6 @@ void	ft_closepipes(int	**pipes, int size)
 		close(pipes[i][1]);
 		i++;
 	}
-	printf("end closepipes\n");
 }
 
 int	**ft_mallocpipes(int size)
@@ -57,7 +55,6 @@ int	**ft_makepipes(int size)
 	int	i;
 	int	**pipes;
 
-	printf("start makepipes\n");
 	i = 0;
 	pipes = ft_mallocpipes(size);
 	if (pipes == NULL)
@@ -71,6 +68,5 @@ int	**ft_makepipes(int size)
 		}
 		i++;
 	}
-	printf("end makepipes\n");
 	return (pipes);
 }

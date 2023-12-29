@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:42:41 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/29 12:19:14 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/29 12:30:05 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int	main(void)
 	redirect = malloc(sizeof(int) * 2);
 	redirect[0] = 0;
 	redirect[1] = 0;
+	redirect[0] = open("input.txt", O_RDONLY);
+	// redirect[1] = open("output.txt", O_WRONLY);
 	if (ft_exec(cmds, redirect) == -1)
 		return (1);
 	free(redirect);

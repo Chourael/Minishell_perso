@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:17:19 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/29 12:20:04 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/29 12:27:19 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	ft_lastcmd(char ***cmds, int **pipes, int i, int *redirection)
 {
 	int	id;
 
-	printf("start lastcmd\n");
 	if ((id = fork()) == -1)
 	{
 		perror("fork");
@@ -60,7 +59,5 @@ int	ft_lastcmd(char ***cmds, int **pipes, int i, int *redirection)
 				return (-1);
 		}
 	}
-	else
-		printf("end last cmd\n");
 	return (0);
 }

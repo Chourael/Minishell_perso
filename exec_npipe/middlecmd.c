@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:07:28 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/28 16:33:01 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/29 12:29:34 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@ int	ft_middlecmd(char ***cmds, int **pipes, int stdout)
 	int	id;
 	int	i;
 
-	printf("start middlecmd\n");
 	i = 1;
 	while(cmds[i + 1] != NULL && cmds[i])
 	{
-		printf("start while %d\n", i);
 		if ((id = fork()) == -1)
 			perror("fork");
 		if (id == 0)
@@ -39,6 +37,5 @@ int	ft_middlecmd(char ***cmds, int **pipes, int stdout)
 		else
 			i++;
 	}
-	printf("end middlecmd\n");
 	return (i);
 }
