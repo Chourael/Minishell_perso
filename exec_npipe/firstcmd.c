@@ -6,11 +6,26 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:17:17 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/28 18:17:12 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/29 12:20:23 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+static int	ft_fromfile(char **cmd, int *firstpipe, int stdout, int redirect)
+{
+	close(firstpipe[0]);
+	dup2(firstpipe[1], STDOUT_FILENO);
+	close(firstpipe[1]);
+	dup2(redirect, STDIN_FILENO);
+	if (execve(cmd[0], cmd, NULL) == -1)
+	{
+		dup2(stdout, STDOUT_FILENO);
+		perror("exec");
+		return (-1);
+	}
+	return (0);
+}
 
 static int	ft_noredirect(char **cmd, int *firstpipe, int stdout)
 {
@@ -23,9 +38,10 @@ static int	ft_noredirect(char **cmd, int *firstpipe, int stdout)
 		perror("exec");
 		return (-1);
 	}
+	return (0);
 }
 
-int	ft_firstcmd(char **cmd, int	*firstpipe, int stdout, int redirect)
+int	ft_firstcmd(char **cmd, int	*firstpipe, int stdout, int *redirect)
 {
 	int	id;
 
@@ -37,10 +53,16 @@ int	ft_firstcmd(char **cmd, int	*firstpipe, int stdout, int redirect)
 	}
 	if (id == 0)
 	{
-		if (redirect == 0)
-			ft_noredirect(cmd, firstpipe, stdout);
-		else if (redirect == 1)
-			ft_fromfile
+		if (redirect[0] == 0)
+		{
+			if (ft_noredirect(cmd, firstpipe, stdout) == -1)
+				return (-1);
+		}
+		else if (redirect[0] > 0)
+		{
+			if (ft_fromfile(cmd, firstpipe, stdout, redirect[0]) == -1)
+				return (-1);
+		}
 	}
 	else
 		wait(NULL);

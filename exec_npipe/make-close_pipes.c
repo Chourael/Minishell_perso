@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:50:37 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/28 17:46:39 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/29 12:21:04 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ int	**ft_makepipes(int size)
 	i = 0;
 	pipes = ft_mallocpipes(size);
 	if (pipes == NULL)
-		return (-1);
+		return ((int **)-1);
 	while (i < size)
 	{
 		if (pipe(pipes[i]) == -1)
 		{
 			perror("pipes");
-			return (-1);
+			return ((int **)-1);
 		}
 		i++;
 	}

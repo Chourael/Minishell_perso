@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:42:41 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/28 18:16:15 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/29 12:19:14 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	len(char ***cmds)
 	return (i);
 }
 
-int	callall(char ***cmds, int **pipes, int redirect)
+int	ft_callall(char ***cmds, int **pipes, int stdout, int *redirect)
 {
 	int	i;
 
@@ -30,15 +30,15 @@ int	callall(char ***cmds, int **pipes, int redirect)
 		return (-1);
 	if ((i = ft_middlecmd(cmds, pipes, stdout)) == -1)
 		return (-1);
-	if (ft_lastcmd(cmds, pipes, i) == -1)
+	if (ft_lastcmd(cmds, pipes, i, redirect) == -1)
 		return (-1);
+	return (0);
 }
 
-int	ft_exec(char ***cmds, int redirect)
+int	ft_exec(char ***cmds, int *redirect)
 {
 	int	**pipes;
 	int	stdout;
-	int	i;
 
 	printf("start ft_exec\n");
 	stdout = dup(STDOUT_FILENO);
@@ -49,7 +49,7 @@ int	ft_exec(char ***cmds, int redirect)
 			return (-1);
 		return (0);
 	}
-	if (ft_callall(cmds, pipes, redirect) == -1)
+	if (ft_callall(cmds, pipes, stdout, redirect) == -1)
 		return (-1);
 	ft_closepipes(pipes, len(cmds));
 	printf("end ft_exec\n");
@@ -66,8 +66,13 @@ int	main(void)
 	char	*sed[] = {"/usr/bin/sed", "s/if/replaced/", NULL};
 	// char	*tee[] = {"/usr/bin/tee", "output.txt", NULL};
 	char	**cmds[] = {cat, sed, grep, wc, NULL};
+	int		*redirect;
 
-	if (ft_exec(cmds, 0) == -1)
+	redirect = malloc(sizeof(int) * 2);
+	redirect[0] = 0;
+	redirect[1] = 0;
+	if (ft_exec(cmds, redirect) == -1)
 		return (1);
+	free(redirect);
 	return (0);
 }
