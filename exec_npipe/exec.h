@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:17:34 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/29 12:18:52 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:20:36 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		ft_lastcmd(char ***cmds, int **pipes, int i, int *redirect);
 
 //malloc-close_pipes.c
 void	ft_closepipes(int	**pipes, int size);
+void	ft_freepipes(int **pipes, int size);
 int		**ft_mallocpipes(int size);
 int		**ft_makepipes(int size);
 

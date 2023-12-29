@@ -6,11 +6,24 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:50:37 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/29 12:26:40 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:20:20 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+void	ft_freepipes(int **pipes, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(pipes[i]);
+		i++;
+	}
+	free(pipes);
+}
 
 void	ft_closepipes(int	**pipes, int size)
 {

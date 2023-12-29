@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:42:41 by chchour           #+#    #+#             */
-/*   Updated: 2023/12/29 12:30:05 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:19:38 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	ft_exec(char ***cmds, int *redirect)
 	if (ft_callall(cmds, pipes, stdout, redirect) == -1)
 		return (-1);
 	ft_closepipes(pipes, len(cmds));
+	ft_freepipes(pipes, len(cmds));
 	printf("end ft_exec\n");
 	return(0);
 }
