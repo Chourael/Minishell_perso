@@ -6,13 +6,14 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:17:34 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/29 13:20:36 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:21:18 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
+# include "../Marianne_libft/libft.a"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
