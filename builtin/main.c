@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:36:07 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/30 11:52:24 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/30 16:47:19 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,10 @@ int	main(void)
 	ft_cd("/home/chourael/Bureau/projet42/pipex/Libft");
 	ft_cd("../../../other");
 	ft_cd("error");
+	ft_cd(".");
+	ft_cd("/");
+	ft_cd(NULL);
+	ft_cd("/home/chourael/Bureau/projet42/minishell/Minishell_perso/builtin");
+	ft_cd("");
 	printf("end cd test\n");
 }

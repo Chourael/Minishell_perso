@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 11:25:17 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/30 11:50:22 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/30 16:51:28 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,20 @@
 
 int	ft_cd(char *str)
 {
-	char *pwd;
+	char	*pwd;;
 
 	pwd = NULL;
-	if (chdir(str) == -1)
+	if (str == NULL || str[0] == '\0')
 	{
-		perror("");
+		if (chdir(getenv("HOME")) == -1)
+		{
+			perror("chdir 1");
+			return (-1);
+		}
+	}
+	else if (chdir(str) == -1)
+	{
+		perror("chdir 0");
 		return (-1);
 	}
 	pwd = getcwd(NULL, 0);
