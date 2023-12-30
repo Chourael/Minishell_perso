@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 11:25:17 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/30 17:08:39 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/30 17:11:47 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int	ft_cd(char *str)
 {
-	char	*pwd;;
-
-	pwd = NULL;
 	if (str == NULL || str[0] == '\0' || str[0] == '~')
 	{
 		if (chdir(getenv("HOME")) == -1)
@@ -30,7 +27,5 @@ int	ft_cd(char *str)
 		perror("chdir 0");
 		return (-1);
 	}
-	pwd = getcwd(NULL, 0);
-	printf("working directory : %s\n", pwd);
 	return (0);
 }
