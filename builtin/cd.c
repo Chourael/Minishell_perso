@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 17:19:40 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/30 11:44:04 by chourael         ###   ########.fr       */
+/*   Created: 2023/12/30 11:25:17 by chourael          #+#    #+#             */
+/*   Updated: 2023/12/30 11:50:22 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#include "builtin.h"
 
-// # include "../Marianne_libft/libft.a"
-# include <unistd.h>
-# include <stdio.h>
+int	ft_cd(char *str)
+{
+	char *pwd;
 
-//echo.c
-void	ft_echo(char *str);
-
-//cd.c
-int		ft_cd(char *str);
-
-#endif
+	pwd = NULL;
+	if (chdir(str) == -1)
+	{
+		perror("");
+		return (-1);
+	}
+	pwd = getcwd(NULL, 0);
+	printf("working directory : %s\n", pwd);
+	return (0);
+}
