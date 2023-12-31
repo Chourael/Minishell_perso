@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 11:59:40 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/31 16:41:13 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/31 16:45:33 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,9 @@ static void	ft_addit(char **env, char *arg)
 
 	i = 0;
 	while(env[i])
-	{
-		if (env[i] == NULL)
-		{
-			ft_strlcpy(env[i], arg, ft_strlen(arg));
-			env[i + 1] = NULL;
-		}
 		i++;
-	}
+	ft_strlcpy(env[i], arg, ft_strlen(arg));	
+	env[i + 1] = NULL;
 }
 
 //take what is befor the = to make the variable name (exemple if arg is THEBEST=chourael,marnianne then variable will be "THEBEST")

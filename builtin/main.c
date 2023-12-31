@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:36:07 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/31 16:40:52 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/31 16:49:55 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,10 @@ void	exporttest(char **env)
 	printf("end export tests\n");
 }
 
-int	main(int argc, char **argv, char **env)
+int	main())
 {
-	if (argc > 1 || argv[1] != NULL)
-		return (0);
-	// echotest();
-	// cdtest();
-	// pwdtest();
-	exporttest(env);
+	echotest();
+	cdtest();
+	pwdtest();
+	// exporttest();
 }
