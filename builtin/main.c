@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:36:07 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/31 14:01:47 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/31 16:40:52 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,18 @@ void	pwdtest(void)
 
 void	exporttest(char **env)
 {
-	char *get;
-
 	printf("start export test1\n");
-	// printf("%s\n", getenv("THEBEST"));
+	printf("%s \n", getenv("THEBEST"));
 	ft_export(env, "THEBEST=Chourael");
-	get = getenv("THEBEST");
-	printf("%s\n", get);
+	printf("%s \n", getenv("THEBEST"));
 	ft_export(env, "THEBEST=Marianne");
-	// printf("%s\n", getenv("THEBEST"));
+	printf("%s \n", getenv("THEBEST"));
 	ft_export(env, "THEBEST=Chourael&Marianne");
-	// printf("%s\n", getenv("THEBEST"));
+	printf("%s \n", getenv("THEBEST"));
 	printf("start export test2\n");
-	// printf("%s\n", getenv("yo"));
+	printf("%s \n", getenv("yo"));
 	ft_export(env, "yo=mister white");
-	// printf("%s\n", getenv("yo"));
+	printf("%s \n", getenv("yo"));
 	printf("end export tests\n");
 }
 
