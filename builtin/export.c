@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.C                                           :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 11:59:40 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/31 13:03:49 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/31 13:34:57 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,37 @@
 //exemple export yeah=yeahyeah la variable yeah n'existe pas alors yeah vas etre créé et etre = a yeahyeah
 //export yeah=nono la variable existe déja donc on export change juste la valeur de la variable donc yeahyeah par nono
 
-static void	ft_make_addit(char **env, char *arg)
+
+//search for the variable inside env and replace it with the arg (assuming arg is correct)
+static void	ft_replaceit(char **env, char *arg, char *var)
 {
 	int	i;
 
+	i = 0;
+	while(env[i])
+	{
+		if (ft_strncmp(env[i], var, ft_strlen(var)) == 0)
+		{
+			free(env[i]);
+			env[i] = malloc(sizeof(char) * (ft_strlen(arg) + 1));
+			ft_strlcpy(env[i], arg, ft_strlen(arg));
+		}
+	}
+}
+
+//itterate env untile NULL and replace NULL by the new variable and it's value (assuming arg is correct)
+static void	ft_addit(char **env, char *arg)
+{
+	int	i;
+
+	i = 0;
 	while(env[i])
 	{
 		if (env[i] == NULL)
 		{
 			env[i] = malloc(sizeof(char) * (ft_strlen(arg) + 1));
-			ft_strlcpy(env[i], arg);
+			ft_strlcpy(env[i], arg, ft_strlen(arg));
+			env[i + 1] = NULL;
 		}
 	}
 }
@@ -49,6 +70,7 @@ static char	*ft_get_var(char *arg)
 		i++;
 	}
 	variable[i] = '\0';
+	return (variable);
 }
 
 void	ft_export(char **env, char *arg)
@@ -57,5 +79,7 @@ void	ft_export(char **env, char *arg)
 
 	variable = ft_get_var(arg);
 	if (getenv(variable) == NULL)
-		ft_make_addit(env, arg);
+		ft_addit(env, arg);
+	else if (getenv(variable) != NULL)
+		ft_replaceit(env, arg, variable);
 }

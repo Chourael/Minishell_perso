@@ -6,14 +6,14 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 17:19:40 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/31 13:11:14 by chourael         ###   ########.fr       */
+/*   Updated: 2023/12/31 13:17:47 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-# include "../Marianne_libft/libft.a"
+# include "../Marianne_libft/libft.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
