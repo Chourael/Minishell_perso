@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   lastcmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:17:19 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/29 12:27:19 by chourael         ###   ########.fr       */
+/*   Updated: 2024/01/01 14:43:56 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-static int	ft_intofile(char ***cmds, int **pipes, int i, int redirect)
+static int	ft_intofile(t_exec *exec, char ***cmds, int i)
 {
-	dup2(pipes[i - 1][0], STDIN_FILENO);
-	dup2(redirect, STDOUT_FILENO);
-	ft_closepipes(pipes, len(cmds));
+	dup2(exec->pipes[i - 1][0], STDIN_FILENO);
+	dup2(exec->redirect[1], STDOUT_FILENO);
+	ft_closepipes(exec->pipes, len(cmds));
 	if (execve(cmds[i][0], cmds[i], NULL) == -1)
 	{
 		perror("exec");
@@ -25,10 +25,10 @@ static int	ft_intofile(char ***cmds, int **pipes, int i, int redirect)
 	return (0);
 }
 
-static int	ft_noredirect(char ***cmds, int **pipes, int i)
+static int	ft_noredirect(t_exec *exec, char ***cmds, int i)
 {
-	dup2(pipes[i - 1][0], STDIN_FILENO);
-	ft_closepipes(pipes, len(cmds));
+	dup2(exec->pipes[i - 1][0], STDIN_FILENO);
+	ft_closepipes(exec->pipes, len(cmds));
 	if (execve(cmds[i][0], cmds[i], NULL) == -1)
 	{
 		perror("exec");
@@ -37,7 +37,7 @@ static int	ft_noredirect(char ***cmds, int **pipes, int i)
 	return (0);
 }
 
-int	ft_lastcmd(char ***cmds, int **pipes, int i, int *redirection)
+int	ft_lastcmd(t_exec *exec, char ***cmds, int i)
 {
 	int	id;
 
@@ -48,14 +48,14 @@ int	ft_lastcmd(char ***cmds, int **pipes, int i, int *redirection)
 	}
 	if (id == 0)
 	{
-		if (redirection[1] == 0)
+		if (exec->redirect[1] == 0)
 		{
-			if (ft_noredirect(cmds, pipes, i) == -1)
+			if (ft_noredirect(exec, cmds, i) == -1)
 				return (-1);
 		}
-		else if (redirection[1] > 0)
+		else if (exec->redirect[1] > 0)
 		{
-			if (ft_intofile(cmds, pipes, i, redirection[1]) == -1)
+			if (ft_intofile(exec, cmds, i) == -1)
 				return (-1);
 		}
 	}

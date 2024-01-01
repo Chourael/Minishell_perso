@@ -3,45 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   firstcmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:17:17 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/29 12:26:53 by chourael         ###   ########.fr       */
+/*   Updated: 2024/01/01 16:41:27 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-static int	ft_fromfile(char **cmd, int *firstpipe, int stdout, int redirect)
+static int	ft_heardoc(t_exec *exec, char **cmd, char *heardoc)
 {
-	close(firstpipe[0]);
-	dup2(firstpipe[1], STDOUT_FILENO);
-	close(firstpipe[1]);
-	dup2(redirect, STDIN_FILENO);
+	write(exec->pipes[0][1], heardoc, ft_strlen(heardoc));
+	dup2(exec->pipes[0][0], STDIN_FILENO);
+	dup2(exec->pipes[1][1], STDOUT_FILENO);
 	if (execve(cmd[0], cmd, NULL) == -1)
 	{
-		dup2(stdout, STDOUT_FILENO);
+		dup2(exec->stdout, STDOUT_FILENO);
 		perror("exec");
 		return (-1);
 	}
 	return (0);
 }
 
-static int	ft_noredirect(char **cmd, int *firstpipe, int stdout)
+static int	ft_fromfile(t_exec *exec, char **cmd)
 {
-	close(firstpipe[0]);
-	dup2(firstpipe[1], STDOUT_FILENO);
-	close(firstpipe[1]);
+	dup2(exec->pipes[1][1], STDOUT_FILENO);
+	dup2(exec->redirect[0], STDIN_FILENO);
 	if (execve(cmd[0], cmd, NULL) == -1)
 	{
-		dup2(stdout, STDOUT_FILENO);
+		dup2(exec->stdout, STDOUT_FILENO);
 		perror("exec");
 		return (-1);
 	}
 	return (0);
 }
 
-int	ft_firstcmd(char **cmd, int	*firstpipe, int stdout, int *redirect)
+static int	ft_noredirect(t_exec *exec, char **cmd)
+{
+	dup2(exec->pipes[1][1], STDOUT_FILENO);
+	if (execve(cmd[0], cmd, NULL) == -1)
+	{
+		dup2(exec->stdout, STDOUT_FILENO);
+		perror("exec");
+		return (-1);
+	}
+	return (0);
+}
+
+int	ft_firstcmd(t_exec *exec, char ***cmds, char *heardoc)
 {
 	int	id;
 
@@ -52,18 +62,23 @@ int	ft_firstcmd(char **cmd, int	*firstpipe, int stdout, int *redirect)
 	}
 	if (id == 0)
 	{
-		if (redirect[0] == 0)
+		if (heardoc != NULL)
 		{
-			if (ft_noredirect(cmd, firstpipe, stdout) == -1)
+			if (ft_heardoc(exec, cmds[0], heardoc) == -1)
 				return (-1);
 		}
-		else if (redirect[0] > 0)
+		else if (exec->redirect[0] == 0)
 		{
-			if (ft_fromfile(cmd, firstpipe, stdout, redirect[0]) == -1)
+			if (ft_noredirect(exec, cmds[0]) == -1)
+				return (-1);
+		}
+		else if (exec->redirect[0] > 0)
+		{
+			if (ft_fromfile(exec, cmds[0]) == -1)
 				return (-1);
 		}
 	}
 	else
-		wait(NULL);
+		return (0);
 	return (0);
 }
