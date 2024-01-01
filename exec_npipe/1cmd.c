@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 17:10:34 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/01 16:55:45 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/01 17:13:03 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ static int	ft_heardoc(t_exec *exec, char ***cmds, char *heardoc)
 	}
 	else if (id > 0)
 	{
-		char	buffer[500];
+		char	buffer[500] = "e";
+
 		if (dup2(exec->pipes[0][0], STDIN_FILENO) == -1)
 			perror("dup2");
 		read(STDIN_FILENO, buffer, sizeof(buffer));
