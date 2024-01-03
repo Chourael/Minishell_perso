@@ -6,7 +6,7 @@
 #    By: chourael <chourael@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 17:54:13 by chchour           #+#    #+#              #
-#    Updated: 2023/12/31 13:10:54 by chourael         ###   ########.fr        #
+#    Updated: 2024/01/03 16:27:06 by chourael         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = builtin
 
 CC = cc
 
-SRCS = main.c echo.c cd.c pwd.c export.c
+SRCS = main.c echo.c cd.c pwd.c export.c unset.c env.c
 
 OBJS = $(SRCS:.c=.o)
 

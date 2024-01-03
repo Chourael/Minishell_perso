@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec-main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:42:41 by chchour           #+#    #+#             */
-/*   Updated: 2024/01/01 16:14:28 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/03 11:17:54 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,13 @@ int	main(void)
 	// char	*ls[] = {"/usr/bin/ls", "-l", NULL};
 	// char	*grep[] = {"/usr/bin/grep", "misterwhite", NULL};
 	char	*wc[] = {"/usr/bin/wc", "-l", NULL};
-	// char	*echo[] = {"/usr/bin/echo", "This is a test input", NULL};
+	char	*echo[] = {"/usr/bin/echo", "This is a test input", NULL};
 	// char	*cat[] = {"/usr/bin/cat", "exec-main.c", NULL};
 	// char	*sed[] = {"/usr/bin/sed", "s/occuyasu/misterwhite/", NULL};
 	// char	*tee[] = {"/usr/bin/tee", "output.txt", NULL};
-	char	**cmds[] = {wc, NULL};
-	char	heardoc[] = "yo occuyasu\nnot display\ni have the goods occuyasu\noccuyasu\nFIN";
+	char	**cmds[] = {echo, wc, NULL};
+	// char	heardoc[] = "yo occuyasu\nnot display\ni have the goods occuyasu\noccuyasu\nFIN";
+	char	*heardoc = NULL;
 	t_exec	exec;
 
 	exec.stdout = dup(STDOUT_FILENO);

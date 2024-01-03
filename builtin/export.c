@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 11:59:40 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/31 16:45:33 by chourael         ###   ########.fr       */
+/*   Updated: 2024/01/03 18:24:25 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,27 @@ static char	*ft_get_var(char *arg)
 	return (variable);
 }
 
+static int	search(char **env, char *var)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], var, ft_strlen(var)) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	ft_export(char **env, char *arg)
 {
 	char *variable;
 
 	variable = ft_get_var(arg);
-	if (getenv(variable) == NULL)
+	if (search(env, variable) == 0)
 		ft_addit(env, arg);
-	else if (getenv(variable) != NULL)
+	else if (search(env, variable) == 1)
 		ft_replaceit(env, arg, variable);
 }

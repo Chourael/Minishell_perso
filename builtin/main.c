@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:36:07 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/01 13:33:57 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/03 18:23:52 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,27 +63,43 @@ void	pwdtest(void)
 	printf("end pwd test\n\n");
 }
 
-void	exporttest(char **env)
+void	export_unset_env(char **env)
 {
-	printf("start export test1\n");
-	printf("%s \n", getenv("THEBEST"));
+	printf("start test1\n");
+	ft_env(env);
 	ft_export(env, "THEBEST=Chourael");
-	printf("%s \n", getenv("THEBEST"));
+	ft_env(env);
 	ft_export(env, "THEBEST=Marianne");
-	printf("%s \n", getenv("THEBEST"));
-	ft_export(env, "THEBEST=Chourael&Marianne");
-	printf("%s \n", getenv("THEBEST"));
-	printf("start export test2\n");
-	printf("%s \n", getenv("yo"));
+	ft_env(env);
+	printf("start test2\n");
 	ft_export(env, "yo=mister white");
-	printf("%s \n", getenv("yo"));
-	printf("end export tests\n");
+	ft_env(env);
+	printf("end ests\n");
+}
+
+char	**makeenv(char **env)
+{
+	env[0] = malloc(sizeof(char) * 26);
+	env[0] = "GAMES=totalwarwarhammer2\0";
+	env[1] = malloc(sizeof(char) * 28);
+	env[1] = "CHOURAEL=emperorofhumanity\0";
+	env[2] = malloc(sizeof(char) * 23);
+	env[2] = "MARIANNE=profesionnal\0";
+	env[3] = malloc(sizeof(char) * 11);
+	env[3] = "THEBEST=nana\0";
+	env[4] = NULL;
+	return (env);
 }
 
 int	main()
 {
-	echotest();
-	cdtest();
-	pwdtest();
-	// exporttest();
+	char	**env;
+
+	env = malloc(sizeof(char *) * 5);
+	env = makeenv(env);
+	// echotest();
+	// cdtest();
+	// pwdtest();
+	export_unset_env(env);
+	return (0);
 }

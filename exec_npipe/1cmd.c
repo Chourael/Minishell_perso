@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   1cmd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 17:10:34 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/01 17:13:03 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/03 11:14:31 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	ft_cmd(char ***cmds)
 {
+	printf("yo \n");
 	if (execve(cmds[0][0], cmds[0], NULL) == -1)
 	{
 		perror("execve");

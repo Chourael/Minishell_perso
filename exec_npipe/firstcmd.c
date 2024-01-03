@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   firstcmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:17:17 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/01 16:41:27 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/03 11:19:20 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	ft_firstcmd(t_exec *exec, char ***cmds, char *heardoc)
 		}
 		else if (exec->redirect[0] == 0)
 		{
+			printf("yoyo\n");		
 			if (ft_noredirect(exec, cmds[0]) == -1)
 				return (-1);
 		}
