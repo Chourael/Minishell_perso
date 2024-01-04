@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 11:59:40 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/04 11:41:21 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/04 13:19:26 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,22 @@ static char	**ft_replaceit(char **env, char *arg, char *var)
 	return (env);
 }
 
+static int	ft_mallocccpy(char **envcpy, char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		// printf("i = %d \n", i);
+		envcpy[i] = malloc(sizeof(char) * (ft_strlen(env[i]) + 1));
+		if (envcpy[i] == NULL)
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
 //itterate env untile NULL and replace NULL by the new variable and it's value (assuming arg is correct)
 static char	**ft_addit(char **env, char *arg)
 {
@@ -48,7 +64,7 @@ static char	**ft_addit(char **env, char *arg)
 
 	i = 0;
 	envcpy = malloc(sizeof(char *) * (ft_len(env) + 2));
-	ft_malloccpy(envcpy, env);
+	ft_mallocccpy(envcpy, env);
 	while(env[i] != NULL)
 	{
 		ft_strlcpy(envcpy[i], env[i], (ft_strlen(env[i]) + 2));

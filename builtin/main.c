@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:36:07 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/04 12:26:57 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/04 13:24:01 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ void	ft_freeenv(char **env)
 	i = 0;
 	while(env[i])
 	{
-		printf("freeing env[%d] = %s \n", i, env[i]);
+		// printf("freeing env[%d] = %s \n", i, env[i]);
 		free(env[i]);
 		i++;
 	}
-	printf("freeing env \n");
+	// printf("freeing env \n");
 	free(env);
 }
 
@@ -107,30 +107,30 @@ char	**makeenv(char **env)
 
 void	export_unset_env(char **env)
 {
-	// printf("start test replace\n");
-	// ft_env(env);
-	// printf("\n\n");
-	// env = ft_export(env, "THEBEST=Chourael");
-	// ft_env(env);
-	// printf("\n\n");
-	// env = ft_export(env, "THEBEST=Marianne");
-	// ft_env(env);
-	// printf("\n\n");
-	// printf("start test add\n");
-	// env = ft_export(env, "yo=mister white");
-	// ft_env(env);
-	// printf("\n\n");
+	printf("start test replace\n");
+	ft_env(env);
+	printf("\n\n");
+	env = ft_export(env, "THEBEST=Chourael");
+	ft_env(env);
+	printf("\n\n");
+	env = ft_export(env, "THEBEST=Marianne");
+	ft_env(env);
+	printf("\n\n");
+	printf("start test add\n");
+	env = ft_export(env, "yo=mister white");
+	ft_env(env);
+	printf("\n\n");
 	printf("start test unset\n");
-	char *arg[] = {"CHOURAEL", NULL};
+	char *arg[] = {"yo", NULL};
 	env = ft_unset(env, arg);
 	ft_env(env);
 	printf("\n\n");
-	// printf("start test multiple arg unset\n");
-	// char *args[] = {"CHOURAEL", "MARIANNE", NULL};
-	// env = ft_unset(env, args);
-	// ft_env(env);
-	// printf("\n\n");
-	// printf("end tests\n");
+	printf("start test multiple arg unset\n");
+	char *args[] = {"CHOURAEL", "MARIANNE", NULL};
+	env = ft_unset(env, args);
+	ft_env(env);
+	printf("\n\n");
+	printf("end tests\n");
 	ft_freeenv(env);
 }
 

@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 17:19:40 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/04 11:39:54 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/04 13:19:44 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**ft_export(char **env, char *arg);
 
 //unset.c
 char	**ft_unset(char **env, char **arg);
-int		ft_malloccpy(char **envcpy, char **env);
+int		ft_malloccpy(char **envcpy, char **env, char **arg);
 int		ft_len(char **env);
 
 //env.c
