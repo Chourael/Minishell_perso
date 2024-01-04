@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:36:07 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/04 13:24:01 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/04 14:10:51 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,12 @@ void	export_unset_env(char **env)
 	printf("\n\n");
 	printf("start test unset\n");
 	char *arg[] = {"yo", NULL};
-	env = ft_unset(env, arg);
+	env = ft_unset(env, arg, 0, 0);
 	ft_env(env);
 	printf("\n\n");
 	printf("start test multiple arg unset\n");
 	char *args[] = {"CHOURAEL", "MARIANNE", NULL};
-	env = ft_unset(env, args);
+	env = ft_unset(env, args, 0, 0);
 	ft_env(env);
 	printf("\n\n");
 	printf("end tests\n");

@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   malloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/30 17:10:48 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/04 14:18:11 by chchour          ###   ########.fr       */
+/*   Created: 2024/01/04 14:15:21 by chchour           #+#    #+#             */
+/*   Updated: 2024/01/04 14:18:08 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <builtin.h>
+#include "builtin.h"
 
-void	ft_pwd(void)
+int	ft_cpymalloc(char **envcpy, char **env)
 {
-	printf("%s\n", getcwd(NULL, 0));
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		envcpy[i] = malloc(sizeof(char) * (ft_strlen(env[i]) + 1));
+		if (envcpy[i] == NULL)
+			return (-1);
+		i++;
+	}
+	return (0);
 }

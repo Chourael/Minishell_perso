@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 17:19:40 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/04 13:19:44 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/04 14:16:44 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,15 @@ void	ft_pwd(void);
 char	**ft_export(char **env, char *arg);
 
 //unset.c
-char	**ft_unset(char **env, char **arg);
+char	**ft_unset(char **env, char **arg, int i, int j);
 int		ft_malloccpy(char **envcpy, char **env, char **arg);
 int		ft_len(char **env);
 
 //env.c
 void	ft_env(char **env);
 void	ft_freeenv(char **env);
+
+//malloc.c
+int		ft_cpymalloc(char **envcpy, char **env);
 
 #endif

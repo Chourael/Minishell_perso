@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:40:41 by chourael          #+#    #+#             */
-/*   Updated: 2023/12/29 17:31:51 by chourael         ###   ########.fr       */
+/*   Updated: 2024/01/04 14:07:59 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	ft_echo(char *str)
 
 	i = 0;
 	n = 0;
-	while(str[i] == ' ' || str[i] == '\"' || str[i] == '\'')
+	while (str[i] == ' ' || str[i] == '\"' || str[i] == '\'')
 		i++;
 	if (str[i] == '-' && str[i + 1] == 'n' && str[i + 2] == ' ')
 	{
 			n = 1;
 			i += 3;
 	}
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] != '\"' && str[i] != '\'')
 			write(1, &str[i], 1);

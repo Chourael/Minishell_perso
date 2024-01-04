@@ -6,32 +6,34 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 11:59:40 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/04 13:19:26 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/04 14:15:39 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-//la cmd export prend 1 seul argument, l'arg doit etre dans cette forme VARNAME=VALUE ou VARNAME="VALUE VALUE" sinon export ne fait rien
+//la cmd export prend 1 seul argument, l'arg doit etre dans cette forme
+//VARNAME=VALUE ou VARNAME="VALUE VALUE" sinon export ne fait rien
 //fonctionne meme si VARNAME n'est pas en maj
-//si une variable existe déjà export va la modifier et si elle n'existe pas elle vas la créé
-//exemple export yeah=yeahyeah la variable yeah n'existe pas alors yeah vas etre créé et etre = a yeahyeah
-//export yeah=nono la variable existe déja donc on export change juste la valeur de la variable donc yeahyeah par nono
+//si une variable existe déjà export va la modifier et si elle n'existe
+// pas elle vas la créé
+// exemple export yeah=yeahyeah la variable yeah n'existe pas alors yeah
+// vas etre créé et etre = a yeahyeah
+//export yeah=nono la variable existe déja donc on export change juste
+// la valeur de la variable donc yeahyeah par nono
+//search for the variable inside env and replace it with the arg
+// (assuming arg is correct)
 
-
-//search for the variable inside env and replace it with the arg (assuming arg is correct)
 static char	**ft_replaceit(char **env, char *arg, char *var)
 {
 	int	i;
 
 	i = 0;
-	while(env[i])
+	while (env[i])
 	{
 		if (ft_strncmp(env[i], var, ft_strlen(var)) == 0)
 		{
-			// printf("env[%d] = %s \n", i, env[i]);
 			free(env[i]);
-			// printf("after free \n");
 			env[i] = malloc(sizeof(char) * (ft_strlen(arg) + 1));
 			ft_strlcpy(env[i], arg, (ft_strlen(arg) + 1));
 		}
@@ -40,23 +42,8 @@ static char	**ft_replaceit(char **env, char *arg, char *var)
 	return (env);
 }
 
-static int	ft_mallocccpy(char **envcpy, char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		// printf("i = %d \n", i);
-		envcpy[i] = malloc(sizeof(char) * (ft_strlen(env[i]) + 1));
-		if (envcpy[i] == NULL)
-			return (-1);
-		i++;
-	}
-	return (0);
-}
-
-//itterate env untile NULL and replace NULL by the new variable and it's value (assuming arg is correct)
+//itterate env untile NULL and replace NULL by the new
+//variable and it's value (assuming arg is correct)
 static char	**ft_addit(char **env, char *arg)
 {
 	int		i;
@@ -64,33 +51,32 @@ static char	**ft_addit(char **env, char *arg)
 
 	i = 0;
 	envcpy = malloc(sizeof(char *) * (ft_len(env) + 2));
-	ft_mallocccpy(envcpy, env);
-	while(env[i] != NULL)
+	ft_cpymalloc(envcpy, env);
+	while (env[i] != NULL)
 	{
 		ft_strlcpy(envcpy[i], env[i], (ft_strlen(env[i]) + 2));
 		i++;
 	}
-	// printf("env[%d] = %s \n", i, env[i]);
 	envcpy[i] = malloc(sizeof(char) * (ft_strlen(arg) + 1));
 	ft_strlcpy(envcpy[i], arg, (ft_strlen(arg) + 1));
 	envcpy[i + 1] = NULL;
-	// printf("envcpy[%d] = %s \n", i + 1, envcpy[i + 1]);
 	ft_freeenv(env);
 	return (envcpy);
 }
 
-//take what is befor the = to make the variable name (exemple if arg is THEBEST=chourael,marnianne then variable will be "THEBEST")
+//take what is befor the = to make the variable name
+//(exemple if arg is THEBEST=chourael,marnianne then variable will be "THEBEST")
 static char	*ft_get_var(char *arg)
 {
-	char *variable;
-	int	i;
+	char	*variable;
+	int		i;
 
 	i = 0;
-	while(arg[i] != '=')
+	while (arg[i] != '=')
 		i++;
 	variable = malloc(sizeof(char) * (i + 1));
 	i = 0;
-	while(arg[i] != '=')
+	while (arg[i] != '=')
 	{
 		variable[i] = arg[i];
 		i++;
@@ -115,24 +101,20 @@ static int	search(char **env, char *var)
 
 char	**ft_export(char **env, char *arg)
 {
-	char *variable;
+	char	*variable;
 
 	variable = ft_get_var(arg);
 	if (search(env, variable) == 0)
 	{
-		// printf("before addit \n");
 		env = ft_addit(env, arg);
 		free(variable);
 		return (env);
-		// printf("after addit \n");
 	}
 	else if (search(env, variable) == 1)
 	{
-		// printf("before replaceit \n");
 		env = ft_replaceit(env, arg, variable);
 		free(variable);
 		return (env);
-		// printf("after replaceit \n");
 	}
 	free(variable);
 	return (env);
