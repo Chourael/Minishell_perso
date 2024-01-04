@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 17:19:40 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/04 10:58:19 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/04 11:39:54 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,6 @@ int		ft_len(char **env);
 
 //env.c
 void	ft_env(char **env);
+void	ft_freeenv(char **env);
+
 #endif

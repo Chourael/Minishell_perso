@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 11:59:40 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/04 11:20:29 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/04 11:41:21 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	**ft_replaceit(char **env, char *arg, char *var)
 		if (ft_strncmp(env[i], var, ft_strlen(var)) == 0)
 		{
 			// printf("env[%d] = %s \n", i, env[i]);
-			// free(env[i]);
+			free(env[i]);
 			// printf("after free \n");
 			env[i] = malloc(sizeof(char) * (ft_strlen(arg) + 1));
 			ft_strlcpy(env[i], arg, (ft_strlen(arg) + 1));
@@ -47,18 +47,19 @@ static char	**ft_addit(char **env, char *arg)
 	char	**envcpy;
 
 	i = 0;
-	envcpy = malloc(sizeof(char *) * (ft_len(env) + 1));
+	envcpy = malloc(sizeof(char *) * (ft_len(env) + 2));
 	ft_malloccpy(envcpy, env);
 	while(env[i] != NULL)
 	{
-		ft_strlcpy(envcpy[i], env[i], (ft_strlen(env[i]) + 1));
+		ft_strlcpy(envcpy[i], env[i], (ft_strlen(env[i]) + 2));
 		i++;
 	}
 	// printf("env[%d] = %s \n", i, env[i]);
 	envcpy[i] = malloc(sizeof(char) * (ft_strlen(arg) + 1));
 	ft_strlcpy(envcpy[i], arg, (ft_strlen(arg) + 1));
 	envcpy[i + 1] = NULL;
-	printf("envcpy[%d] = %s \n", i + 1, envcpy[i + 1]);
+	// printf("envcpy[%d] = %s \n", i + 1, envcpy[i + 1]);
+	ft_freeenv(env);
 	return (envcpy);
 }
 
@@ -104,14 +105,19 @@ char	**ft_export(char **env, char *arg)
 	if (search(env, variable) == 0)
 	{
 		// printf("before addit \n");
-		return (ft_addit(env, arg));
+		env = ft_addit(env, arg);
+		free(variable);
+		return (env);
 		// printf("after addit \n");
 	}
 	else if (search(env, variable) == 1)
 	{
 		// printf("before replaceit \n");
-		return (ft_replaceit(env, arg, variable));
+		env = ft_replaceit(env, arg, variable);
+		free(variable);
+		return (env);
 		// printf("after replaceit \n");
 	}
+	free(variable);
 	return (env);
 }

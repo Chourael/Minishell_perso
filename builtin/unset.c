@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 12:16:51 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/04 11:08:37 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/04 12:44:04 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	ft_malloccpy(char **envcpy, char **env)
 	i = 0;
 	while (env[i])
 	{
+		printf("i = %d \n", i);
 		envcpy[i] = malloc(sizeof(char) * (ft_strlen(env[i]) + 1));
 		if (envcpy[i] == NULL)
 			return (-1);
@@ -40,9 +41,9 @@ int	ft_malloccpy(char **envcpy, char **env)
 //unset * don't work on bash so it sould not work here
 char	**ft_unset(char **env, char **arg)
 {
-	int	i;
-	int	o;
-	int	j;
+	int		i;
+	int		o;
+	int		j;
 	char	**envcpy;
 
 	i = 0;
@@ -68,10 +69,14 @@ char	**ft_unset(char **env, char **arg)
 			// printf("env[%d] = %s \n", i, env[i]);
 		}
 		else if (env[i] == NULL)
+		{
 			break;
+		}
 		i++;
 		j++;
 	}
 	envcpy[j] = NULL;
+	ft_freeenv(env);
+	free(env[1]);
 	return (envcpy);
 }

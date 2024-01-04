@@ -6,7 +6,7 @@
 /*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:36:07 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/04 11:20:52 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/04 12:26:57 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,46 +63,75 @@ void	pwdtest(void)
 	printf("end pwd test\n\n");
 }
 
+void	ft_freeenv(char **env)
+{
+	int	i;
+
+	i = 0;
+	while(env[i])
+	{
+		printf("freeing env[%d] = %s \n", i, env[i]);
+		free(env[i]);
+		i++;
+	}
+	printf("freeing env \n");
+	free(env);
+}
+
+void	fillit(char *env, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		env[i] = str[i];
+		i++;
+	}
+	env[i] = '\0';
+}
+
 char	**makeenv(char **env)
 {
 	env[0] = malloc(sizeof(char) * 26);
-	env[0] = "GAMES=totalwarwarhammer2\0";
+	fillit(env[0], "GAMES=totalwarwarhammer2");
 	env[1] = malloc(sizeof(char) * 28);
-	env[1] = "CHOURAEL=emperorofhumanity\0";
+	fillit(env[1], "CHOURAEL=emperorofhumanity");
 	env[2] = malloc(sizeof(char) * 23);
-	env[2] = "MARIANNE=profesionnal\0";
-	env[3] = malloc(sizeof(char) * 11);
-	env[3] = "THEBEST=nana\0";
+	fillit(env[2], "MARIANNE=profesionnal");
+	env[3] = malloc(sizeof(char) * 13);
+	fillit(env[3], "THEBEST=nana");
 	env[4] = NULL;
 	return (env);
 }
 
 void	export_unset_env(char **env)
 {
-	printf("start test replace\n");
+	// printf("start test replace\n");
 	// ft_env(env);
-	printf("\n\n");
-	env = ft_export(env, "THEBEST=Chourael");
+	// printf("\n\n");
+	// env = ft_export(env, "THEBEST=Chourael");
 	// ft_env(env);
-	printf("\n\n");
-	env = ft_export(env, "THEBEST=Marianne");
+	// printf("\n\n");
+	// env = ft_export(env, "THEBEST=Marianne");
 	// ft_env(env);
-	printf("\n\n");
-	printf("start test add\n");
-	env = ft_export(env, "yo=mister white");
+	// printf("\n\n");
+	// printf("start test add\n");
+	// env = ft_export(env, "yo=mister white");
 	// ft_env(env);
-	printf("\n\n");
+	// printf("\n\n");
 	printf("start test unset\n");
-	char *arg[] = {"yo", NULL};
+	char *arg[] = {"CHOURAEL", NULL};
 	env = ft_unset(env, arg);
-	// ft_env(env);
+	ft_env(env);
 	printf("\n\n");
-	printf("start test multiple arg unset\n");
-	char *args[] = {"CHOURAEL", "MARIANNE", NULL};
-	env = ft_unset(env, args);
+	// printf("start test multiple arg unset\n");
+	// char *args[] = {"CHOURAEL", "MARIANNE", NULL};
+	// env = ft_unset(env, args);
 	// ft_env(env);
-	printf("\n\n");
-	printf("end tests\n");
+	// printf("\n\n");
+	// printf("end tests\n");
+	ft_freeenv(env);
 }
 
 int	main()
