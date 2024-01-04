@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 12:16:51 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/03 17:30:26 by chourael         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:08:37 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-static int	ft_len(char **env)
+int	ft_len(char **env)
 {
 	int i;
 
@@ -22,7 +22,7 @@ static int	ft_len(char **env)
 	return (i);
 }
 
-static int	ft_malloccpy(char **envcpy, char **env)
+int	ft_malloccpy(char **envcpy, char **env)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ static int	ft_malloccpy(char **envcpy, char **env)
 }
 
 //unset * don't work on bash so it sould not work here
-int	ft_unset(char **env, char **arg)
+char	**ft_unset(char **env, char **arg)
 {
 	int	i;
 	int	o;
@@ -51,16 +51,27 @@ int	ft_unset(char **env, char **arg)
 	ft_malloccpy(envcpy, env);
 	while (env[i])
 	{
+		// printf("i = %d \n", i);
+		// printf("env[%d] = %s \n", i, env[i]);
 		o = 0;
 		while (arg[o])
 		{
-			if (env[i] == arg[o])
+			// printf("arg[%d] = %s && env[%d] = %s \n", o, arg[o], i, env[i]);
+			if (ft_strncmp(env[i], arg[o], ft_strlen(arg[o])) == 0)
 				i++;
 			o++;
 		}
-		ft_strlcpy(envcpy[j], env[i], ft_strlen(env[i]));
+		if (env[i] != NULL)
+		{
+			ft_strlcpy(envcpy[j], env[i], (ft_strlen(env[i]) + 1));
+			// printf("envcpy[%d] = %s \n", j, envcpy[j]);
+			// printf("env[%d] = %s \n", i, env[i]);
+		}
+		else if (env[i] == NULL)
+			break;
 		i++;
 		j++;
 	}
-	return (0);
+	envcpy[j] = NULL;
+	return (envcpy);
 }

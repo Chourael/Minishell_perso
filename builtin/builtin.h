@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 17:19:40 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/03 16:34:56 by chourael         ###   ########.fr       */
+/*   Updated: 2024/01/04 10:58:19 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ int		ft_cd(char *str);
 void	ft_pwd(void);
 
 //export.c
-void	ft_export(char **env, char *arg);
+char	**ft_export(char **env, char *arg);
 
 //unset.c
-int		ft_unset(char **env, char **arg);
+char	**ft_unset(char **env, char **arg);
+int		ft_malloccpy(char **envcpy, char **env);
+int		ft_len(char **env);
 
 //env.c
 void	ft_env(char **env);

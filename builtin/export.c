@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 11:59:40 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/03 18:24:25 by chourael         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:20:29 by chchour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 
 //search for the variable inside env and replace it with the arg (assuming arg is correct)
-static void	ft_replaceit(char **env, char *arg, char *var)
+static char	**ft_replaceit(char **env, char *arg, char *var)
 {
 	int	i;
 
@@ -29,24 +29,37 @@ static void	ft_replaceit(char **env, char *arg, char *var)
 	{
 		if (ft_strncmp(env[i], var, ft_strlen(var)) == 0)
 		{
-			free(env[i]);
+			// printf("env[%d] = %s \n", i, env[i]);
+			// free(env[i]);
+			// printf("after free \n");
 			env[i] = malloc(sizeof(char) * (ft_strlen(arg) + 1));
-			ft_strlcpy(env[i], arg, ft_strlen(arg));
+			ft_strlcpy(env[i], arg, (ft_strlen(arg) + 1));
 		}
 		i++;
 	}
+	return (env);
 }
 
 //itterate env untile NULL and replace NULL by the new variable and it's value (assuming arg is correct)
-static void	ft_addit(char **env, char *arg)
+static char	**ft_addit(char **env, char *arg)
 {
-	int	i;
+	int		i;
+	char	**envcpy;
 
 	i = 0;
-	while(env[i])
+	envcpy = malloc(sizeof(char *) * (ft_len(env) + 1));
+	ft_malloccpy(envcpy, env);
+	while(env[i] != NULL)
+	{
+		ft_strlcpy(envcpy[i], env[i], (ft_strlen(env[i]) + 1));
 		i++;
-	ft_strlcpy(env[i], arg, ft_strlen(arg));	
-	env[i + 1] = NULL;
+	}
+	// printf("env[%d] = %s \n", i, env[i]);
+	envcpy[i] = malloc(sizeof(char) * (ft_strlen(arg) + 1));
+	ft_strlcpy(envcpy[i], arg, (ft_strlen(arg) + 1));
+	envcpy[i + 1] = NULL;
+	printf("envcpy[%d] = %s \n", i + 1, envcpy[i + 1]);
+	return (envcpy);
 }
 
 //take what is befor the = to make the variable name (exemple if arg is THEBEST=chourael,marnianne then variable will be "THEBEST")
@@ -83,13 +96,22 @@ static int	search(char **env, char *var)
 	return (0);
 }
 
-void	ft_export(char **env, char *arg)
+char	**ft_export(char **env, char *arg)
 {
 	char *variable;
 
 	variable = ft_get_var(arg);
 	if (search(env, variable) == 0)
-		ft_addit(env, arg);
+	{
+		// printf("before addit \n");
+		return (ft_addit(env, arg));
+		// printf("after addit \n");
+	}
 	else if (search(env, variable) == 1)
-		ft_replaceit(env, arg, variable);
+	{
+		// printf("before replaceit \n");
+		return (ft_replaceit(env, arg, variable));
+		// printf("after replaceit \n");
+	}
+	return (env);
 }
