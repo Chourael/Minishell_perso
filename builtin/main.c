@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:36:07 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/07 14:14:24 by chourael         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:13:17 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,19 @@ void	fillit(char *env, char *str)
 
 char	**makeenv(char **env)
 {
-	env[0] = malloc(sizeof(char) * 26);
-	fillit(env[0], "GAMES=totalwarwarhammer2");
-	env[1] = malloc(sizeof(char) * 28);
-	fillit(env[1], "CHOURAEL=emperorofhumanity");
-	env[2] = malloc(sizeof(char) * 23);
-	fillit(env[2], "MARIANNE=profesionnal");
-	env[3] = malloc(sizeof(char) * 13);
-	fillit(env[3], "THEBEST=nana");
+	env[0] = malloc(sizeof(char) * 9);
+	fillit(env[0], "SHLVL=3");
+	env[1] = malloc(sizeof(char) * 26);
+	fillit(env[1], "GAMES=totalwarwarhammer2");
+	env[2] = malloc(sizeof(char) * 28);
+	fillit(env[2], "CHOURAEL=emperorofhumanity");
+	env[3] = malloc(sizeof(char) * 23);
+	fillit(env[3], "MARIANNE=profesionnal");
 	env[4] = malloc(sizeof(char) * 13);
-	fillit(env[4], "PWD=working");
-	env[5] = NULL;
+	fillit(env[4], "THEBEST=nana");
+	env[5] = malloc(sizeof(char) * 13);
+	fillit(env[5], "PWD=working");
+	env[6] = NULL;
 	return (env);
 }
 
@@ -136,6 +138,10 @@ char	**export_unset_env(char **env)
 	env = ft_unset(env, args, 0, 0);
 	ft_env(env);
 	printf("\n\n");
+	printf("start unset SHLVL \n");
+	char *arg1[] = {"SHLVL", NULL};
+	env = ft_unset(env, arg1, 0, 0);
+	ft_env(env);
 	printf("end tests\n");
 	return (env);
 }
@@ -144,12 +150,12 @@ int	main()
 {
 	char	**env;
 
-	env = malloc(sizeof(char *) * 6);
+	env = malloc(sizeof(char *) * 7);
 	env = makeenv(env);
 	// echotest();
 	// cdtest();
-	env = pwdtest(env);
-	// env = export_unset_env(env);
+	// env = pwdtest(env);
+	env = export_unset_env(env);
 	ft_freeenv(env);
 	return (0);
 }
