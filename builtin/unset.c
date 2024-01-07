@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 12:16:51 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/04 14:16:54 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/07 14:10:54 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	ft_malloccpy(char **envcpy, char **env, char **arg)
 	return (0);
 }
 
-//unset * don't work on bash so it sould not work here
 char	**ft_unset(char **env, char **arg, int i, int j)
 {
 	int		o;
