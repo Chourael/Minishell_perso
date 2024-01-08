@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:42:41 by chchour           #+#    #+#             */
-/*   Updated: 2024/01/03 11:17:54 by chourael         ###   ########.fr       */
+/*   Updated: 2024/01/08 13:46:10 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	ft_callall(t_exec *exec, char ***cmds, char *heardoc)
 		return (-1);
 	if ((i = ft_middlecmd(exec, cmds)) == -1)
 		return (-1);
+	printf("3 i = %d \n", i);
 	if (ft_lastcmd(exec, cmds, i) == -1)
 		return (-1);
 	return (0);
@@ -41,6 +42,7 @@ int	ft_exec(t_exec *exec, char ***cmds, char *heardoc)
 	exec->pipes = ft_makepipes((len(cmds) + 1));
 	if (len(cmds) == 1)
 	{
+		printf("starting 1cmd \n");
 		if (ft_1cmd(exec, cmds, heardoc) == -1)
 			return (-1);
 		ft_closepipes(exec->pipes, (len(cmds) + 1));

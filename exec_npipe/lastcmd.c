@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:17:19 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/03 11:21:00 by chourael         ###   ########.fr       */
+/*   Updated: 2024/01/08 13:51:37 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	ft_intofile(t_exec *exec, char ***cmds, int i)
 
 static int	ft_noredirect(t_exec *exec, char ***cmds, int i)
 {
+	printf("5 i = %d \n", i);
 	dup2(exec->pipes[i - 1][0], STDIN_FILENO);
 	ft_closepipes(exec->pipes, len(cmds));
 	if (execve(cmds[i][0], cmds[i], NULL) == -1)
@@ -41,6 +42,7 @@ int	ft_lastcmd(t_exec *exec, char ***cmds, int i)
 {
 	int	id;
 
+	printf("4 i = %d \n", i);
 	if ((id = fork()) == -1)
 	{
 		perror("fork");
@@ -59,5 +61,7 @@ int	ft_lastcmd(t_exec *exec, char ***cmds, int i)
 				return (-1);
 		}
 	}
+	else
+		wait(NULL);
 	return (0);
 }

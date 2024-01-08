@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   middlecmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chchour <chchour@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:07:28 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/01 15:17:56 by chchour          ###   ########.fr       */
+/*   Updated: 2024/01/08 13:44:02 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	ft_middlecmd(t_exec *exec, char ***cmds)
 	int	i;
 
 	i = 2;
+	printf("0 i = %d \n", i);
 	while(cmds[i + 1] != NULL && cmds[i])
 	{
 		if ((id = fork()) == -1)
@@ -35,7 +36,12 @@ int	ft_middlecmd(t_exec *exec, char ***cmds)
 			}
 		}
 		else
+		{
+			wait(NULL);
 			i++;
+			printf("1 i = %d \n", i);
+		}
 	}
+	printf("2 i = %d \n", i);
 	return (i);
 }
