@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:17:17 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/08 13:41:28 by chourael         ###   ########.fr       */
+/*   Updated: 2024/01/09 11:41:10 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 static int	ft_heardoc(t_exec *exec, char **cmd, char *heardoc)
 {
-	write(exec->pipes[0][1], heardoc, ft_strlen(heardoc));
-	dup2(exec->pipes[0][0], STDIN_FILENO);
-	dup2(exec->pipes[1][1], STDOUT_FILENO);
+	int	hearpipe[2];
+
+	pipe(hearpipe);
+	write(hearpipe[1], heardoc, ft_strlen(heardoc));
+	dup2(hearpipe[0], STDIN_FILENO);
+	close(hearpipe[0]);
+	close(hearpipe[1]);
+	dup2(exec->pipes[0][1], STDOUT_FILENO);
 	if (execve(cmd[0], cmd, NULL) == -1)
 	{
 		dup2(exec->stdout, STDOUT_FILENO);
@@ -28,7 +33,7 @@ static int	ft_heardoc(t_exec *exec, char **cmd, char *heardoc)
 
 static int	ft_fromfile(t_exec *exec, char **cmd)
 {
-	dup2(exec->pipes[1][1], STDOUT_FILENO);
+	dup2(exec->pipes[0][1], STDOUT_FILENO);
 	dup2(exec->redirect[0], STDIN_FILENO);
 	if (execve(cmd[0], cmd, NULL) == -1)
 	{
@@ -41,7 +46,7 @@ static int	ft_fromfile(t_exec *exec, char **cmd)
 
 static int	ft_noredirect(t_exec *exec, char **cmd)
 {
-	dup2(exec->pipes[1][1], STDOUT_FILENO);
+	dup2(exec->pipes[0][1], STDOUT_FILENO);
 	if (execve(cmd[0], cmd, NULL) == -1)
 	{
 		dup2(exec->stdout, STDOUT_FILENO);
@@ -79,6 +84,9 @@ int	ft_firstcmd(t_exec *exec, char ***cmds, char *heardoc)
 		}
 	}
 	else
-		wait(NULL);
+	{
+		// wait(NULL);
+		return(0);
+	}
 	return (0);
 }

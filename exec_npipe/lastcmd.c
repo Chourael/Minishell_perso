@@ -6,7 +6,7 @@
 /*   By: chourael <chourael@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:17:19 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/08 13:51:37 by chourael         ###   ########.fr       */
+/*   Updated: 2024/01/09 11:34:27 by chourael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ int	ft_lastcmd(t_exec *exec, char ***cmds, int i)
 		}
 	}
 	else
+	{
 		wait(NULL);
+		return(0);
+	}
 	return (0);
 }
